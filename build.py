@@ -145,8 +145,23 @@ loading="lazy" allowfullscreen title="{html.escape(t["source_title"])}"></iframe
     return "\n".join(out)
 
 
-def thread_card(t, by_slug, by_user, p, link_permalink=True):
+def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
     op = by_slug[t["op"]]
+    if compact:
+        n = len(t["comments"])
+        rp = ""
+        if t["repost"]:
+            rp = f' · ↪ dibagikan ulang oleh @{html.escape(t["repost"]["by"])}'
+        parts = ['<article class="post compact">',
+                 f'<a class="card-link" href="{p}thread/{t["slug"]}.html" aria-label="Buka utas"></a>',
+                 post_head(op, t, p),
+                 f'<p class="post-text">{rich(t["op_text"])}</p>', media_html(t, p)]
+        if t["tags"]:
+            chips = " ".join(f'<a href="{p}tag/{html.escape(tag)}.html">#{html.escape(tag)}</a>' for tag in t["tags"])
+            parts.append(f'<div class="tags">{chips}</div>')
+        parts.append(f'<div class="thread-meta">💬 {n} komentar{rp} · Buka utas →</div>')
+        parts.append('</article>')
+        return "\n".join(parts)
     parts = ['<article class="post">', post_head(op, t, p),
              f'<p class="post-text">{rich(t["op_text"])}</p>', media_html(t, p)]
     if t["tags"]:
@@ -178,7 +193,7 @@ def repost_item(t, by_slug, by_user, p):
     return f'''<div class="repost-wrap"><p class="repost-note">{avatar(sk, p, small=True)}
 <span><strong>{html.escape(sk["name"].upper())}</strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
 <p class="repost-text">{rich(rp["text"])}</p>
-<div class="embedded">{thread_card(t, by_slug, by_user, p)}</div></div>'''
+<div class="embedded">{thread_card(t, by_slug, by_user, p, compact=True)}</div></div>'''
 
 
 def participants(t, by_slug, by_user):
@@ -214,7 +229,7 @@ def shell(title, p, body):
 
 
 def feed_item(t, by_slug, by_user, p):
-    wrap = f'<div data-skills="{participants(t, by_slug, by_user)}">{thread_card(t, by_slug, by_user, p)}</div>'
+    wrap = f'<div data-skills="{participants(t, by_slug, by_user)}">{thread_card(t, by_slug, by_user, p, compact=True)}</div>'
     if t["repost"]:
         wrap += f'\n<div data-skills="{participants(t, by_slug, by_user)}">{repost_item(t, by_slug, by_user, p)}</div>'
     return wrap

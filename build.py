@@ -8,6 +8,7 @@ import html
 import json
 import re
 import shutil
+from datetime import datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -114,13 +115,14 @@ def rich(text):
 
 def avatar(skill, p, small=False):
     cls = "avatar sm" if small else "avatar"
+    disp = skill.get("display", skill["name"])
     return (f'<div class="{cls}" style="background:{skill["color"]};border-color:{skill["color"]}" '
-            f'title="{html.escape(skill["name"])}">{html.escape(skill["name"][0])}</div>')
+            f'title="{html.escape(disp)}">{html.escape(disp[0])}</div>')
 
 
 def post_head(skill, t, p):
     return f'''<div class="post-head">{avatar(skill, p)}
-<div class="who"><div class="name">{html.escape(skill["name"].upper())}</div>
+<div class="who"><div class="name">{html.escape(skill.get("display", skill["name"]))}</div>
 <div class="handle">@{html.escape(skill["username"])}</div></div>
 <div class="when">{fmt_date(t["date"], t["time"])}</div></div>'''
 
@@ -176,7 +178,7 @@ def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
             reply = (f'<div class="reply-note">menanggapi @{html.escape(c["reply_to"])}</div>'
                      if c.get("reply_to") else "")
             parts.append(f'''<div class="comment">{avatar(sk, p, small=True)}
-<div class="c-body"><div class="c-who">{html.escape(sk["name"].upper())} <span class="handle">@{html.escape(sk["username"])}</span></div>
+<div class="c-body"><div class="c-who">{html.escape(sk.get("display", sk["name"]))} <span class="handle">@{html.escape(sk["username"])}</span></div>
 {reply}<div class="c-text">{rich(c["text"])}</div></div></div>''')
         parts.append('</div>')
     if link_permalink:
@@ -191,7 +193,7 @@ def repost_item(t, by_slug, by_user, p):
     if not sk:
         return ""
     return f'''<div class="repost-wrap"><p class="repost-note">{avatar(sk, p, small=True)}
-<span><strong>{html.escape(sk["name"].upper())}</strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
+<span><strong>{html.escape(sk.get("display", sk["name"]))}</strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
 <p class="repost-text">{rich(rp["text"])}</p>
 <div class="embedded">{thread_card(t, by_slug, by_user, p, compact=True)}</div></div>'''
 
@@ -220,9 +222,10 @@ def make_excerpt(text, n=160):
     return t if len(t) <= n else t[:n - 1].rsplit(" ", 1)[0] + "…"
 
 
-def shell(title, p, body, desc=None, image=None, ogtype="website"):
+def shell(title, p, body, desc=None, image=None, ogtype="website", extra_script=None):
     desc = desc or DEFAULT_DESC
     image = image or DEFAULT_IMG
+    extra = f'<script src="{p}{extra_script}"></script>' if extra_script else ''
     return f'''<!DOCTYPE html>
 <html lang="id"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -240,12 +243,13 @@ def shell(title, p, body, desc=None, image=None, ogtype="website"):
 <header class="site-head">
 <p class="site-title"><span class="num">24</span> SUARA</p>
 <p class="site-sub">Satu kepala. Dua puluh empat penghuni. Mereka membaca apa yang lewat — lalu bicara.</p>
-<nav class="main"><a href="{p}index.html">Feed</a><a href="{p}skills.html">Para Suara</a><a href="{p}tags.html">Tag</a><a href="{p}build.html">Build</a><a href="{p}tentang.html">Tentang</a></nav>
+<nav class="main"><a href="{p}index.html">Beranda</a><a href="{p}cari.html">Cari</a><a href="{p}tags.html">Topik</a></nav>
 </header>
 {body}
-<footer class="site">24 Suara adalah proyek hobi penggemar: 24 suara terinspirasi keterampilan dalam Disco Elysium (© ZA/UM) mengomentari bacaan, berita, video, dan meme dalam Bahasa Indonesia. Bukan afiliasi resmi. Utas ditulis sebagai Markdown di repositori ini — bisa diedit, lalu situs dibangun ulang.<br>Mesin gerbang: sebuah suara berkomentar bila level + relevansi ≥ 10. Level digenerate ulang tiap bulan.</footer>
+<footer class="site"><p class="foot-nav"><a href="{p}skills.html">Para Suara</a> · <a href="{p}build.html">Build</a> · <a href="{p}tentang.html">Tentang</a></p>
+24 Suara adalah proyek hobi penggemar: 24 suara terinspirasi keterampilan dalam Disco Elysium (© ZA/UM) mengomentari bacaan, berita, video, dan meme dalam Bahasa Indonesia. Bukan afiliasi resmi. Utas ditulis sebagai Markdown di repositori ini — bisa diedit, lalu situs dibangun ulang.<br>Mesin gerbang: sebuah suara berkomentar bila level + relevansi ≥ 10. Level digenerate ulang tiap bulan.</footer>
 </div>
-<script src="{p}feed.js"></script>
+<script src="{p}feed.js"></script>{extra}
 </body></html>'''
 
 
@@ -270,19 +274,35 @@ def build_site():
     shutil.copy(SRC / "style.css", DOCS / "style.css")
     shutil.copy(SRC / "feed.js", DOCS / "feed.js")
     shutil.copy(SRC / "favicon.svg", DOCS / "favicon.svg")
+    shutil.copy(SRC / "cari.js", DOCS / "cari.js")
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
 
     all_tags = sorted({tag for t in threads for tag in t["tags"]})
 
     # --- feed ---
-    opts = "".join(f'<option value="{s["slug"]}">{html.escape(s["name"])} — @{html.escape(s["username"])}</option>' for s in skills)
+    opts = "".join(f'<option value="{s["slug"]}">{html.escape(s.get("display", s["name"]))} — @{html.escape(s["username"])}</option>' for s in skills)
     chips = " ".join(f'<a href="tag/{html.escape(tag)}.html">#{html.escape(tag)}</a>' for tag in all_tags)
-    items = "\n".join(feed_item(t, by_slug, by_user, "") for t in threads)
+    def dt_of(t):
+        try:
+            return datetime.strptime(t["date"] + " " + (t["time"] or "00:00"), "%Y-%m-%d %H:%M")
+        except Exception:
+            return datetime.min
+    hot = sorted(threads, key=lambda t: (len(t["comments"]), t["date"], t["time"]), reverse=True)
+    latest = max((dt_of(t) for t in threads), default=datetime.min)
+    top24_list = [t for t in threads if dt_of(t) >= latest - timedelta(hours=24)]
+    def view(name, lst, empty=""):
+        inner = "\n".join(feed_item(t, by_slug, by_user, "") for t in lst)
+        if not inner:
+            inner = f'<p class="count-note">{empty}</p>'
+        return f'<div data-view="{name}">{inner}<p class="filternote"></p></div>'
+    views_html = (view("terbaru", threads) + "\n" + view("hot", hot) + "\n"
+                  + view("top24", top24_list, "Belum ada utas dalam 24 jam terakhir."))
     body = f'''<div class="intro"><strong>Baru di sini?</strong> Kepala ini dihuni 24 suara. Sang kurator menempelkan tautan — artikel, video, gambar — lalu suara-suara itu membacanya dan berbicara sesuai karakternya: memuji, membantah, menafsir. Yang tampil di feed adalah awal utas; klik untuk membaca percakapannya. <a href="tentang.html">Ini situs apa? →</a></div>
 <div class="filterbar"><label for="skill-filter">Saring suara</label>
 <select id="skill-filter"><option value="">Semua suara</option>{opts}</select></div>
+<div class="feedtabs"><button class="feedtab on" data-tab="terbaru">Terbaru</button><button class="feedtab" data-tab="hot">Hot</button><button class="feedtab" data-tab="top24">Top 24 jam</button></div>
 <div class="tagchips">{chips}</div>
-{items}'''
+{views_html}'''
     (DOCS / "index.html").write_text(shell("Feed", "", body), encoding="utf-8")
 
     # --- thread pages ---
@@ -309,10 +329,10 @@ def build_site():
         b = f'<h1 class="page">#{html.escape(tag)}</h1><p class="count-note">{len(sel)} utas</p>'
         b += "\n".join(feed_item(t, by_slug, by_user, "../") for t in sel)
         (DOCS / "tag" / f"{tag}.html").write_text(shell(f"#{tag}", "../", b), encoding="utf-8")
-    lis = "".join(f'<p><a href="tag/{html.escape(tag)}.html">#{html.escape(tag)}</a> '
-                  f'<span class="count-note">({sum(1 for t in threads if tag in t["tags"])} utas)</span></p>'
+    lis = "".join(f'<div class="topik-row"><a href="tag/{html.escape(tag)}.html">#{html.escape(tag)}</a>'
+                  f'<span class="count-note">{sum(1 for t in threads if tag in t["tags"])} utas</span></div>'
                   for tag in all_tags)
-    (DOCS / "tags.html").write_text(shell("Tag", "", f'<h1 class="page">Semua Tag</h1>{lis}'), encoding="utf-8")
+    (DOCS / "tags.html").write_text(shell("Topik", "", f'<h1 class="page">Topik</h1>{lis}'), encoding="utf-8")
 
     # --- skill profiles ---
     for s in skills:
@@ -333,19 +353,19 @@ def build_site():
 <div class="excerpt">{html.escape(excerpt)}</div>
 <a class="permalink" href="../thread/{t["slug"]}.html">Lihat utas →</a></div>''')
         b = f'''<div class="prof-head">{avatar(s, "../")}
-<div><div class="name" style="font-size:16px;letter-spacing:.22em;font-weight:700">{html.escape(s["name"].upper())}<span class="level-badge">Level {s["level"]}</span></div>
+<div><div class="name" style="font-size:17px;font-weight:700">{html.escape(s.get("display", s["name"]))}<span class="level-badge">Level {s["level"]}</span></div>
 <div class="handle">@{html.escape(s["username"])}</div>
-<div class="attr-label" style="color:{s["color"]}">{html.escape(s["attribute"])}</div></div></div>
+<div class="attr-label" style="color:{s["color"]}">{html.escape("Suara " + s["name"] + " · " + s["attribute"])}</div></div></div>
 <p class="bio">{html.escape(s["bio"])}</p>
 <h1 class="page">Aktivitas</h1>
 {''.join(acts) if acts else '<p class="count-note">Belum bersuara pada periode ini. Kediaman juga data.</p>'}'''
-        (DOCS / "skill" / f'{s["slug"]}.html').write_text(shell(s["name"], "../", b), encoding="utf-8")
+        (DOCS / "skill" / f'{s["slug"]}.html').write_text(shell(s.get("display", s["name"]), "../", b), encoding="utf-8")
 
     groups = []
     for attr in ATTR_ORDER:
         cards = "".join(
             f'<a class="skill-card" href="skill/{s["slug"]}.html">{avatar(s, "", small=True)}'
-            f'<span><strong style="letter-spacing:.14em">{html.escape(s["name"].upper())}</strong><br>'
+            f'<span><strong>{html.escape(s.get("display", s["name"]))}</strong><br>'
             f'<span class="handle">@{html.escape(s["username"])}</span> · Level {s["level"]}</span></a>'
             for s in skills if s["attribute"] == attr)
         groups.append(f'<h1 class="page" style="color:{data["attributes"][attr]["color"]}">{attr}</h1><div class="grid">{cards}</div>')
@@ -377,6 +397,13 @@ def build_site():
 <h1 class="page">Catatan</h1>
 <p>Proyek hobi seorang penggemar; bukan afiliasi resmi ZA/UM. Seluruh utas situs ini adalah berkas Markdown terbuka di repositori GitHub-nya — bisa dibaca, diedit, dan dibangun ulang oleh siapa pun.</p>'''
     (DOCS / "tentang.html").write_text(shell("Tentang", "", tb), encoding="utf-8")
+
+    # --- cari ---
+    cb = '''<h1 class="page">Cari</h1>
+<p class="count-note">Cari di judul sumber, isi utas, komentar, tag, dan nama suara.</p>
+<input id="q" class="searchbox" type="search" placeholder="Ketik kata kunci…" autocomplete="off">
+<div id="results" style="margin-top:14px"></div>'''
+    (DOCS / "cari.html").write_text(shell("Cari", "", cb, extra_script="cari.js"), encoding="utf-8")
 
     # --- index.json ---
     payload = {"build_name": data["build_name"], "skills": skills, "threads": threads}

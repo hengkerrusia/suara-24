@@ -216,6 +216,9 @@ DEFAULT_DESC = ("Dua puluh empat suara dalam satu kepala membaca internet: "
                 "opini, bantahan, dan tafsir mereka atas tautan-tautan pilihan.")
 DEFAULT_IMG = SITE + "/assets/esai-moral.jpg"
 
+# Footer dipertahankan di kode tapi TIDAK dirender (arahan user 23 Okt 2026 — "siapa tau besok butuh").
+FOOTER_ON = False
+
 
 def make_excerpt(text, n=160):
     t = " ".join(text.replace("*", "").split())
@@ -226,6 +229,10 @@ def shell(title, p, body, desc=None, image=None, ogtype="website", extra_script=
     desc = desc or DEFAULT_DESC
     image = image or DEFAULT_IMG
     extra = f'<script src="{p}{extra_script}"></script>' if extra_script else ''
+    footer = ''
+    if FOOTER_ON:
+        footer = f'''<footer class="site"><p class="foot-nav"><a href="{p}skills.html">Para Suara</a> · <a href="{p}build.html">Build</a> · <a href="{p}tentang.html">Tentang</a></p>
+24 Suara adalah proyek hobi penggemar: 24 suara terinspirasi keterampilan dalam Disco Elysium (© ZA/UM) mengomentari bacaan, berita, video, dan meme dalam Bahasa Indonesia. Bukan afiliasi resmi. Utas ditulis sebagai Markdown di repositori ini — bisa diedit, lalu situs dibangun ulang.<br>Mesin gerbang: sebuah suara berkomentar bila level + relevansi ≥ 10. Level digenerate ulang tiap bulan.</footer>'''
     return f'''<!DOCTYPE html>
 <html lang="id"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -246,8 +253,7 @@ def shell(title, p, body, desc=None, image=None, ogtype="website", extra_script=
 <nav class="main"><a href="{p}index.html">Beranda</a><a href="{p}cari.html">Cari</a><a href="{p}tags.html">Topik</a></nav>
 </header>
 {body}
-<footer class="site"><p class="foot-nav"><a href="{p}skills.html">Para Suara</a> · <a href="{p}build.html">Build</a> · <a href="{p}tentang.html">Tentang</a></p>
-24 Suara adalah proyek hobi penggemar: 24 suara terinspirasi keterampilan dalam Disco Elysium (© ZA/UM) mengomentari bacaan, berita, video, dan meme dalam Bahasa Indonesia. Bukan afiliasi resmi. Utas ditulis sebagai Markdown di repositori ini — bisa diedit, lalu situs dibangun ulang.<br>Mesin gerbang: sebuah suara berkomentar bila level + relevansi ≥ 10. Level digenerate ulang tiap bulan.</footer>
+{footer}
 </div>
 <script src="{p}feed.js"></script>{extra}
 </body></html>'''

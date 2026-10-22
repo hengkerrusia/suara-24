@@ -46,6 +46,15 @@ nav.main a:hover{color:var(--gold);text-decoration:none}
 .foot-nav{margin:0 0 8px}
 .foot-nav a{color:var(--muted)}
 
+/* quote card (repost ringkas) */
+.quote-card{position:relative;display:flex;gap:12px;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer}
+.q-thumb{width:72px;height:72px;object-fit:cover;border-radius:8px;flex:none}
+.q-body{min-width:0}
+.q-name{font-weight:700;font-size:14.5px}
+.q-text{color:#d8d8d2;font-size:14.5px;margin:3px 0 0}
+.q-meta{color:var(--muted);font-size:13px;margin-top:6px}
+
 /* intro */
 .intro{background:#14131a;border:1px solid #2b2838;border-left:3px solid #b197fc;
   border-radius:12px;padding:13px 16px;margin:16px 0 4px;font-size:15px;color:#d8d8d2}

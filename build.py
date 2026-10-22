@@ -187,6 +187,18 @@ def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
     return "\n".join(parts)
 
 
+def quote_card(t, by_slug, p):
+    op = by_slug[t["op"]]
+    disp = op.get("display", op["name"])
+    thumb = t["source_image"] or t["image"]
+    img = (f'<img class="q-thumb" src="{p}{html.escape(thumb)}" alt="" loading="lazy">'
+           if thumb else "")
+    return f'''<article class="quote-card"><a class="card-link" href="{p}thread/{t["slug"]}.html" aria-label="Buka utas"></a>
+{img}<div class="q-body"><div class="q-name">{html.escape(disp)} <span class="handle">@{html.escape(op["username"])}</span></div>
+<p class="q-text">{html.escape(make_excerpt(t["op_text"], 140))}</p>
+<div class="q-meta">💬 {len(t["comments"])} komentar · Buka utas →</div></div></article>'''
+
+
 def repost_item(t, by_slug, by_user, p):
     rp = t["repost"]
     sk = by_user.get(rp["by"])
@@ -195,7 +207,7 @@ def repost_item(t, by_slug, by_user, p):
     return f'''<div class="repost-wrap"><p class="repost-note">{avatar(sk, p, small=True)}
 <span><strong>{html.escape(sk.get("display", sk["name"]))}</strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
 <p class="repost-text">{rich(rp["text"])}</p>
-<div class="embedded">{thread_card(t, by_slug, by_user, p, compact=True)}</div></div>'''
+<div class="embedded">{quote_card(t, by_slug, p)}</div></div>'''
 
 
 def participants(t, by_slug, by_user):

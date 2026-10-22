@@ -73,6 +73,9 @@ nav.main a:hover{color:var(--gold);text-decoration:none}
   align-items:center;justify-content:center;font-weight:700;font-size:19px;
   color:#0e0d0b;border:2px solid var(--faint)}
 .avatar.sm{width:36px;height:36px;flex-basis:36px;font-size:15px}
+.avatar-img{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:0 0 46px;border:2px solid}
+.avatar-img.sm{width:36px;height:36px;flex-basis:36px}
+.prof-head .avatar-img{width:64px;height:64px;flex-basis:64px}
 .who{min-width:0}
 .who .name{font-size:15px;font-weight:700}
 .who .handle{color:var(--muted);font-size:14px}

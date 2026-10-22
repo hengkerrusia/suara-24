@@ -27,6 +27,8 @@ def load_skills():
     by_user, by_slug = {}, {}
     for s in data["skills"]:
         s["color"] = data["attributes"][s["attribute"]]["color"]
+        s["avatar"] = (f'assets/avatars/{s["slug"]}.jpg'
+                       if (ASSETS / "avatars" / f'{s["slug"]}.jpg').exists() else "")
         by_user[s["username"]] = s
         by_slug[s["slug"]] = s
     return data, by_user, by_slug
@@ -114,8 +116,12 @@ def rich(text):
 
 
 def avatar(skill, p, small=False):
-    cls = "avatar sm" if small else "avatar"
     disp = skill.get("display", skill["name"])
+    if skill.get("avatar"):
+        cls = "avatar-img sm" if small else "avatar-img"
+        return (f'<img class="{cls}" src="{p}{skill["avatar"]}" alt="" loading="lazy" '
+                f'style="border-color:{skill["color"]}" title="{html.escape(disp)}">')
+    cls = "avatar sm" if small else "avatar"
     return (f'<div class="{cls}" style="background:{skill["color"]};border-color:{skill["color"]}" '
             f'title="{html.escape(disp)}">{html.escape(disp[0])}</div>')
 
@@ -231,7 +237,7 @@ def participants(t, by_slug, by_user):
 SITE = "https://hengkerrusia.github.io/suara-24"
 DEFAULT_DESC = ("Dua puluh empat suara dalam satu kepala membaca internet: "
                 "opini, bantahan, dan tafsir mereka atas tautan-tautan pilihan.")
-DEFAULT_IMG = SITE + "/assets/esai-moral.jpg"
+DEFAULT_IMG = SITE + "/assets/og-image.jpg"
 
 # Footer dipertahankan di kode tapi TIDAK dirender (arahan user 23 Okt 2026 — "siapa tau besok butuh").
 FOOTER_ON = False

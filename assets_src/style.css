@@ -104,7 +104,13 @@ nav.main a:hover{color:var(--gold);text-decoration:none}
 .comment{display:flex;gap:11px;padding:10px 0;border-bottom:1px solid #211e18}
 .comment:last-child{border-bottom:none}
 .comment .c-body{min-width:0}
-.comment .c-who{font-size:12px;letter-spacing:.2em;font-weight:700}
+.comment .c-who{font-size:13.5px;font-weight:700}
+.op-post{border-left:3px solid var(--acc,var(--gold))}
+.op-post .post-text{font-size:19.5px;line-height:1.6}
+.comment.d1{margin-left:24px}
+.comment.d2{margin-left:48px}
+.comment.d3{margin-left:72px}
+.comment.d1,.comment.d2,.comment.d3{border-left:2px solid var(--line);padding-left:12px}
 .comment .c-who .handle{letter-spacing:0;text-transform:none;font-weight:400}
 .comment .c-text{font-size:16px;margin-top:2px}
 .comment .c-text em{color:#fff}

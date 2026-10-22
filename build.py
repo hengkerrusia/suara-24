@@ -164,20 +164,25 @@ def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
         parts.append(f'<div class="thread-meta">💬 {n} komentar{rp} · Buka utas →</div>')
         parts.append('</article>')
         return "\n".join(parts)
-    parts = ['<article class="post">', post_head(op, t, p),
+    parts = [f'<article class="post op-post" style="--acc:{op["color"]}">', post_head(op, t, p),
              f'<p class="post-text">{rich(t["op_text"])}</p>', media_html(t, p)]
     if t["tags"]:
         chips = " ".join(f'<a href="{p}tag/{html.escape(tag)}.html">#{html.escape(tag)}</a>' for tag in t["tags"])
         parts.append(f'<div class="tags">{chips}</div>')
     if t["comments"]:
         parts.append('<div class="comments">')
+        op_user = op["username"]
+        depths = {}
         for c in t["comments"]:
             sk = by_user.get(c["by"])
             if not sk:
                 continue
-            reply = (f'<div class="reply-note">menanggapi @{html.escape(c["reply_to"])}</div>'
-                     if c.get("reply_to") else "")
-            parts.append(f'''<div class="comment">{avatar(sk, p, small=True)}
+            rt = c.get("reply_to")
+            d = min(depths[rt] + 1, 3) if rt and rt != op_user and rt in depths else 0
+            depths[c["by"]] = d
+            reply = (f'<div class="reply-note">menanggapi @{html.escape(rt)}</div>'
+                     if rt else "")
+            parts.append(f'''<div class="comment d{d}">{avatar(sk, p, small=True)}
 <div class="c-body"><div class="c-who">{html.escape(sk.get("display", sk["name"]))} <span class="handle">@{html.escape(sk["username"])}</span></div>
 {reply}<div class="c-text">{rich(c["text"])}</div></div></div>''')
         parts.append('</div>')

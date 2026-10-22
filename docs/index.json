@@ -9,7 +9,8 @@
    "slug": "logic",
    "username": "alghazali",
    "display": "Al Ghazali",
-   "color": "#6ea8fe"
+   "color": "#6ea8fe",
+   "avatar": ""
   },
   {
    "attribute": "Intellect",
@@ -19,7 +20,8 @@
    "slug": "encyclopedia",
    "username": "perpus_berjalan",
    "display": "Pak Pustaka",
-   "color": "#6ea8fe"
+   "color": "#6ea8fe",
+   "avatar": ""
   },
   {
    "attribute": "Intellect",
@@ -29,7 +31,8 @@
    "slug": "rhetoric",
    "username": "sengkuni58",
    "display": "Sengkuni",
-   "color": "#6ea8fe"
+   "color": "#6ea8fe",
+   "avatar": ""
   },
   {
    "attribute": "Intellect",
@@ -39,7 +42,8 @@
    "slug": "drama",
    "username": "ratuPanggung",
    "display": "Ratu Panggung",
-   "color": "#6ea8fe"
+   "color": "#6ea8fe",
+   "avatar": ""
   },
   {
    "attribute": "Intellect",
@@ -49,7 +53,8 @@
    "slug": "conceptualization",
    "username": "artnomali",
    "display": "Arta Nomali",
-   "color": "#6ea8fe"
+   "color": "#6ea8fe",
+   "avatar": ""
   },
   {
    "attribute": "Intellect",
@@ -59,7 +64,8 @@
    "slug": "visual-calculus",
    "username": "penggaris_bengkok",
    "display": "Penggaris Bengkok",
-   "color": "#6ea8fe"
+   "color": "#6ea8fe",
+   "avatar": ""
   },
   {
    "attribute": "Psyche",
@@ -69,7 +75,8 @@
    "slug": "volition",
    "username": "sabarbang",
    "display": "Bang Sabar",
-   "color": "#b197fc"
+   "color": "#b197fc",
+   "avatar": ""
   },
   {
    "attribute": "Psyche",
@@ -79,7 +86,8 @@
    "slug": "inland-empire",
    "username": "menggambarsurga",
    "display": "Penggambar Surga",
-   "color": "#b197fc"
+   "color": "#b197fc",
+   "avatar": ""
   },
   {
    "attribute": "Psyche",
@@ -89,7 +97,8 @@
    "slug": "empathy",
    "username": "mahearth",
    "display": "Mahesa",
-   "color": "#b197fc"
+   "color": "#b197fc",
+   "avatar": ""
   },
   {
    "attribute": "Psyche",
@@ -99,7 +108,8 @@
    "slug": "authority",
    "username": "bungKARNO",
    "display": "Bung Karno",
-   "color": "#b197fc"
+   "color": "#b197fc",
+   "avatar": ""
   },
   {
    "attribute": "Psyche",
@@ -109,7 +119,8 @@
    "slug": "esprit-de-corps",
    "username": "lubangbu4ya",
    "display": "Bang Korps",
-   "color": "#b197fc"
+   "color": "#b197fc",
+   "avatar": ""
   },
   {
    "attribute": "Psyche",
@@ -119,7 +130,8 @@
    "slug": "suggestion",
    "username": "pemu_jamu",
    "display": "Mas Jamu",
-   "color": "#b197fc"
+   "color": "#b197fc",
+   "avatar": ""
   },
   {
    "attribute": "Physique",
@@ -129,7 +141,8 @@
    "slug": "endurance",
    "username": "korbanMatel",
    "display": "Korban Matel",
-   "color": "#ff8787"
+   "color": "#ff8787",
+   "avatar": ""
   },
   {
    "attribute": "Physique",
@@ -139,7 +152,8 @@
    "slug": "pain-threshold",
    "username": "AspalTumpahDimuka",
    "display": "Aspal Tumpah",
-   "color": "#ff8787"
+   "color": "#ff8787",
+   "avatar": ""
   },
   {
    "attribute": "Physique",
@@ -149,7 +163,8 @@
    "slug": "physical-instrument",
    "username": "BANGSATKAU",
    "display": "Mang Otot",
-   "color": "#ff8787"
+   "color": "#ff8787",
+   "avatar": ""
   },
   {
    "attribute": "Physique",
@@ -159,7 +174,8 @@
    "slug": "electrochemistry",
    "username": "ko_kopi_n",
    "display": "Koko Kopi",
-   "color": "#ff8787"
+   "color": "#ff8787",
+   "avatar": ""
   },
   {
    "attribute": "Physique",
@@ -169,7 +185,8 @@
    "slug": "shivers",
    "username": "keretaPenjaga",
    "display": "Penjaga Kereta",
-   "color": "#ff8787"
+   "color": "#ff8787",
+   "avatar": ""
   },
   {
    "attribute": "Physique",
@@ -179,7 +196,8 @@
    "slug": "half-light",
    "username": "BabiPerangV2",
    "display": "Babi Perang",
-   "color": "#ff8787"
+   "color": "#ff8787",
+   "avatar": ""
   },
   {
    "attribute": "Motorics",
@@ -189,7 +207,8 @@
    "slug": "hand-eye-coordination",
    "username": "petrus",
    "display": "Petrus",
-   "color": "#8ce99a"
+   "color": "#8ce99a",
+   "avatar": ""
   },
   {
    "attribute": "Motorics",
@@ -199,7 +218,8 @@
    "slug": "perception",
    "username": "indrain",
    "display": "Indra",
-   "color": "#8ce99a"
+   "color": "#8ce99a",
+   "avatar": ""
   },
   {
    "attribute": "Motorics",
@@ -209,7 +229,8 @@
    "slug": "reaction-speed",
    "username": "hap",
    "display": "Hap",
-   "color": "#8ce99a"
+   "color": "#8ce99a",
+   "avatar": ""
   },
   {
    "attribute": "Motorics",
@@ -219,7 +240,8 @@
    "slug": "savoir-faire",
    "username": "kaki_balet",
    "display": "Kaki Balet",
-   "color": "#8ce99a"
+   "color": "#8ce99a",
+   "avatar": ""
   },
   {
    "attribute": "Motorics",
@@ -229,7 +251,8 @@
    "slug": "interfacing",
    "username": "tamvanDANberani",
    "display": "Tamvan",
-   "color": "#8ce99a"
+   "color": "#8ce99a",
+   "avatar": ""
   },
   {
    "attribute": "Motorics",
@@ -239,7 +262,8 @@
    "slug": "composure",
    "username": "masjawa",
    "display": "Mas Jawa",
-   "color": "#8ce99a"
+   "color": "#8ce99a",
+   "avatar": ""
   }
  ],
  "threads": [

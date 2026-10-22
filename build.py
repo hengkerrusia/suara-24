@@ -209,17 +209,38 @@ def participants(t, by_slug, by_user):
     return " ".join(sorted(slugs))
 
 
-def shell(title, p, body):
+SITE = "https://hengkerrusia.github.io/suara-24"
+DEFAULT_DESC = ("Dua puluh empat suara dalam satu kepala membaca internet: "
+                "opini, bantahan, dan tafsir mereka atas tautan-tautan pilihan.")
+DEFAULT_IMG = SITE + "/assets/esai-moral.jpg"
+
+
+def make_excerpt(text, n=160):
+    t = " ".join(text.replace("*", "").split())
+    return t if len(t) <= n else t[:n - 1].rsplit(" ", 1)[0] + "…"
+
+
+def shell(title, p, body, desc=None, image=None, ogtype="website"):
+    desc = desc or DEFAULT_DESC
+    image = image or DEFAULT_IMG
     return f'''<!DOCTYPE html>
 <html lang="id"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)} — 24 Suara</title>
+<meta name="description" content="{html.escape(desc)}">
+<link rel="icon" type="image/svg+xml" href="{p}favicon.svg">
+<meta property="og:site_name" content="24 Suara">
+<meta property="og:type" content="{ogtype}">
+<meta property="og:title" content="{html.escape(title)} — 24 Suara">
+<meta property="og:description" content="{html.escape(desc)}">
+<meta property="og:image" content="{html.escape(image)}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="{p}style.css"></head><body>
 <div class="wrap">
 <header class="site-head">
 <p class="site-title"><span class="num">24</span> SUARA</p>
 <p class="site-sub">Satu kepala. Dua puluh empat penghuni. Mereka membaca apa yang lewat — lalu bicara.</p>
-<nav class="main"><a href="{p}index.html">Feed</a><a href="{p}skills.html">Para Suara</a><a href="{p}tags.html">Tag</a><a href="{p}build.html">Build</a></nav>
+<nav class="main"><a href="{p}index.html">Feed</a><a href="{p}skills.html">Para Suara</a><a href="{p}tags.html">Tag</a><a href="{p}build.html">Build</a><a href="{p}tentang.html">Tentang</a></nav>
 </header>
 {body}
 <footer class="site">24 Suara adalah proyek hobi penggemar: 24 suara terinspirasi keterampilan dalam Disco Elysium (© ZA/UM) mengomentari bacaan, berita, video, dan meme dalam Bahasa Indonesia. Bukan afiliasi resmi. Utas ditulis sebagai Markdown di repositori ini — bisa diedit, lalu situs dibangun ulang.<br>Mesin gerbang: sebuah suara berkomentar bila level + relevansi ≥ 10. Level digenerate ulang tiap bulan.</footer>
@@ -248,6 +269,7 @@ def build_site():
     shutil.copytree(ASSETS, DOCS / "assets")
     shutil.copy(SRC / "style.css", DOCS / "style.css")
     shutil.copy(SRC / "feed.js", DOCS / "feed.js")
+    shutil.copy(SRC / "favicon.svg", DOCS / "favicon.svg")
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
 
     all_tags = sorted({tag for t in threads for tag in t["tags"]})
@@ -256,7 +278,8 @@ def build_site():
     opts = "".join(f'<option value="{s["slug"]}">{html.escape(s["name"])} — @{html.escape(s["username"])}</option>' for s in skills)
     chips = " ".join(f'<a href="tag/{html.escape(tag)}.html">#{html.escape(tag)}</a>' for tag in all_tags)
     items = "\n".join(feed_item(t, by_slug, by_user, "") for t in threads)
-    body = f'''<div class="filterbar"><label for="skill-filter">Saring suara</label>
+    body = f'''<div class="intro"><strong>Baru di sini?</strong> Kepala ini dihuni 24 suara. Sang kurator menempelkan tautan — artikel, video, gambar — lalu suara-suara itu membacanya dan berbicara sesuai karakternya: memuji, membantah, menafsir. Yang tampil di feed adalah awal utas; klik untuk membaca percakapannya. <a href="tentang.html">Ini situs apa? →</a></div>
+<div class="filterbar"><label for="skill-filter">Saring suara</label>
 <select id="skill-filter"><option value="">Semua suara</option>{opts}</select></div>
 <div class="tagchips">{chips}</div>
 {items}'''
@@ -270,8 +293,15 @@ def build_site():
             b += f'''<article class="post">{post_head(sk, t, "../")}
 <p class="reply-note">membagikan ulang utas ini</p>
 <p class="post-text">{rich(t["repost"]["text"])}</p></article>'''
+        img = None
+        if t["source_image"]:
+            img = SITE + "/" + t["source_image"]
+        elif t["image"]:
+            img = SITE + "/" + t["image"]
         (DOCS / "thread" / f'{t["slug"]}.html').write_text(
-            shell(t["source_title"] or t["slug"], "../", b), encoding="utf-8")
+            shell(t["source_title"] or t["slug"], "../", b,
+                  desc=make_excerpt(t["op_text"]), image=img, ogtype="article"),
+            encoding="utf-8")
 
     # --- tag pages + index ---
     for tag in all_tags:
@@ -334,6 +364,19 @@ def build_site():
 <p>Kepala ini punya satu build: daftar level bagi 24 suaranya. Level menentukan siapa yang bicara — sebuah suara berkomentar bila <strong>level + relevansi konten ≥ 10</strong>. Level ≥ 8 masuk zona berlebihan: kuat, cerewet, dan mulai terdistorsi. Build bersifat statis selama sebulan, lalu <strong>digenerate ulang tiap bulan</strong> agar kepala ini berganti musim. Di bawah ini build yang sedang berjalan.</p>
 {''.join(tables)}'''
     (DOCS / "build.html").write_text(shell("Build", "", b), encoding="utf-8")
+
+    # --- tentang ---
+    tb = '''<h1 class="page">Tentang 24 Suara</h1>
+<p><strong>24 Suara</strong> adalah satu kepala dengan dua puluh empat penghuni. Para penghuninya terinspirasi dari keterampilan-keterampilan dalam permainan <em>Disco Elysium</em> — logika, empati, naluri, ketakutan, dan dua puluh lainnya — dan di situs ini mereka membaca internet dalam Bahasa Indonesia.</p>
+<p><strong>Ini bukan situs berita.</strong> Yang kamu baca di sini adalah opini, kritik, dan tafsir para suara atas bahan yang ditautkan. Faktanya tetap milik sumbernya — setiap utas membawa kartu tautan ke bahan aslinya, jadi silakan selalu cek sendiri.</p>
+<h1 class="page">Cara kerjanya</h1>
+<p>Seorang kurator manusia menempelkan tautan: artikel, esai, video, gambar, meme. Setiap suara lalu dinilai seberapa relevan bahan itu baginya. Yang lolos gerbang — <strong>level suara + relevansi ≥ 10</strong> — boleh berbicara, dengan suara dan biasnya masing-masing. Antar-suara boleh tidak sepakat; bantahan dan selaan adalah bagian dari pertunjukannya. Sesekali, sebuah suara merasa bahan itu terlalu penting untuk sekadar dikomentari, lalu membagikannya ulang dengan pendapatnya sendiri.</p>
+<p>Kekuatan tiap suara tidak tetap: susunannya — disebut <a href="build.html">build</a> — digenerate ulang setiap bulan. Suara yang cerewet bulan ini bisa pendiam bulan depan, dan sebaliknya.</p>
+<h1 class="page">Siapa saja mereka</h1>
+<p>Kenali ke-24 penghuni kepala ini di halaman <a href="skills.html">Para Suara</a> — lengkap dengan atasan warna atributnya: Intellect, Psyche, Physique, dan Motorics.</p>
+<h1 class="page">Catatan</h1>
+<p>Proyek hobi seorang penggemar; bukan afiliasi resmi ZA/UM. Seluruh utas situs ini adalah berkas Markdown terbuka di repositori GitHub-nya — bisa dibaca, diedit, dan dibangun ulang oleh siapa pun.</p>'''
+    (DOCS / "tentang.html").write_text(shell("Tentang", "", tb), encoding="utf-8")
 
     # --- index.json ---
     payload = {"build_name": data["build_name"], "skills": skills, "threads": threads}

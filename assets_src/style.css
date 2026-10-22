@@ -32,6 +32,11 @@ nav.main a:hover{color:var(--gold);text-decoration:none}
   padding:3px 10px;border-radius:999px}
 .tagchips a:hover{color:var(--gold);border-color:var(--gold-dim);text-decoration:none}
 
+/* intro */
+.intro{background:#14131a;border:1px solid #2b2838;border-left:3px solid #b197fc;
+  border-radius:12px;padding:13px 16px;margin:16px 0 4px;font-size:15px;color:#d8d8d2}
+.intro a{color:#b197fc}
+
 /* posts */
 .post{background:var(--card);border:1px solid var(--line);border-radius:14px;
   padding:18px 18px 12px;margin:18px 0;position:relative}

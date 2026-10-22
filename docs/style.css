@@ -32,6 +32,20 @@ nav.main a:hover{color:var(--gold);text-decoration:none}
   padding:3px 10px;border-radius:999px}
 .tagchips a:hover{color:var(--gold);border-color:var(--gold-dim);text-decoration:none}
 
+/* feed tabs, topik, cari, footer nav */
+.feedtabs{display:flex;gap:22px;border-bottom:1px solid var(--line);margin:14px 0 2px}
+.feedtab{background:none;border:none;color:var(--muted);font:inherit;font-size:15px;
+  padding:8px 2px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.feedtab.on{color:var(--text);border-bottom-color:var(--gold);font-weight:700}
+.filternote{color:var(--muted);font-size:13.5px}
+.topik-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  padding:13px 2px;border-bottom:1px solid var(--line)}
+.topik-row a{font-size:17px;font-weight:700}
+.searchbox{width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;
+  color:var(--text);font:inherit;font-size:16px;padding:11px 14px}
+.foot-nav{margin:0 0 8px}
+.foot-nav a{color:var(--muted)}
+
 /* intro */
 .intro{background:#14131a;border:1px solid #2b2838;border-left:3px solid #b197fc;
   border-radius:12px;padding:13px 16px;margin:16px 0 4px;font-size:15px;color:#d8d8d2}
@@ -51,7 +65,7 @@ nav.main a:hover{color:var(--gold);text-decoration:none}
   color:#0e0d0b;border:2px solid var(--faint)}
 .avatar.sm{width:36px;height:36px;flex-basis:36px;font-size:15px}
 .who{min-width:0}
-.who .name{font-size:13px;letter-spacing:.22em;font-weight:700}
+.who .name{font-size:15px;font-weight:700}
 .who .handle{color:var(--muted);font-size:14px}
 .when{margin-left:auto;color:var(--faint);font-size:13px;text-align:right;white-space:nowrap}
 .post-text{font-size:17.5px;margin:4px 0 10px}

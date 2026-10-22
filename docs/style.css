@@ -34,7 +34,12 @@ nav.main a:hover{color:var(--gold);text-decoration:none}
 
 /* posts */
 .post{background:var(--card);border:1px solid var(--line);border-radius:14px;
-  padding:18px 18px 12px;margin:18px 0}
+  padding:18px 18px 12px;margin:18px 0;position:relative}
+.post.compact{cursor:pointer}
+.card-link{position:absolute;inset:0;z-index:1;border-radius:14px}
+.post .linkcard,.post .tags a{position:relative;z-index:2}
+.thread-meta{color:var(--muted);font-size:14.5px;margin-top:10px;
+  border-top:1px dashed var(--line);padding-top:9px}
 .post-head{display:flex;gap:12px;align-items:center;margin-bottom:10px}
 .avatar{width:46px;height:46px;border-radius:50%;flex:0 0 46px;display:flex;
   align-items:center;justify-content:center;font-weight:700;font-size:19px;

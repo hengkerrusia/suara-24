@@ -338,6 +338,7 @@ def build_site():
     shutil.copy(SRC / "favicon.svg", DOCS / "favicon.svg")
     shutil.copy(SRC / "cari.js", DOCS / "cari.js")
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
+    (DOCS / "CNAME").write_text("parawarga.ai.id\n", encoding="utf-8")
 
     all_tags = sorted({tag for t in threads for tag in t["tags"]})
 

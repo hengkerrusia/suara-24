@@ -95,7 +95,7 @@ def parse_thread(path):
         "youtube": fm.get("youtube", ""),
         "image": fm.get("image", ""),
         "image_alt": fm.get("image_alt", ""),
-        "op_text": " ".join(sections.get("op", "").split()),
+        "op_text": "\n\n".join(" ".join(p.split()) for p in sections.get("op", "").split("\n\n") if p.strip()),
         "comments": comments,
         "repost": repost,
     }
@@ -156,6 +156,7 @@ loading="lazy" allowfullscreen title="{html.escape(t["source_title"])}"></iframe
 
 def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
     op = by_slug[t["op"]]
+    op_html = "".join(f'<p class="post-text">{rich(p)}</p>' for p in t["op_text"].split("\n\n"))
     if compact:
         n = len(t["comments"])
         rp = ""
@@ -164,7 +165,7 @@ def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
         parts = ['<article class="post compact">',
                  f'<a class="card-link" href="{p}thread/{t["slug"]}.html" aria-label="Buka utas"></a>',
                  post_head(op, t, p),
-                 f'<p class="post-text">{rich(t["op_text"])}</p>', media_html(t, p)]
+                 op_html, media_html(t, p)]
         if t["tags"]:
             chips = " ".join(f'<a href="{p}tag/{html.escape(tag)}.html">#{html.escape(tag)}</a>' for tag in t["tags"])
             parts.append(f'<div class="tags">{chips}</div>')
@@ -172,7 +173,7 @@ def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
         parts.append('</article>')
         return "\n".join(parts)
     parts = [f'<article class="post op-post" style="--acc:{op["color"]}">', post_head(op, t, p),
-             f'<p class="post-text">{rich(t["op_text"])}</p>', media_html(t, p)]
+             op_html, media_html(t, p)]
     if t["tags"]:
         chips = " ".join(f'<a href="{p}tag/{html.escape(tag)}.html">#{html.escape(tag)}</a>' for tag in t["tags"])
         parts.append(f'<div class="tags">{chips}</div>')

@@ -20,6 +20,7 @@ SRC = ROOT / "assets_src"
 MONTHS = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli",
           "Agustus", "September", "Oktober", "November", "Desember"]
 ATTR_ORDER = ["Intellect", "Psyche", "Physique", "Motorics"]
+ATTR_LABEL = {"Intellect": "Akal", "Psyche": "Batin", "Physique": "Raga", "Motorics": "Gerak"}
 
 
 def load_skills():
@@ -387,8 +388,7 @@ def build_site():
                         '<p class="count-note">Belum bersuara pada periode ini. Kediaman juga data.</p>')
         b = f'''<div class="prof-head">{avatar(s, "../")}
 <div><div class="name" style="font-size:17px;font-weight:700">{html.escape(s.get("display", s["name"]))}<span class="level-badge">Level {s["level"]}</span></div>
-<div class="handle">@{html.escape(s["username"])}</div>
-<div class="attr-label" style="color:{s["color"]}">{html.escape("Suara " + s["name"] + " · " + s["attribute"])}</div></div></div>
+<div class="handle">@{html.escape(s["username"])}</div></div></div>
 <p class="bio">{html.escape(s["bio"])}</p>
 {stats}
 {sections}'''
@@ -401,17 +401,17 @@ def build_site():
             f'<span><strong>{html.escape(s.get("display", s["name"]))}</strong><br>'
             f'<span class="handle">@{html.escape(s["username"])}</span> · Level {s["level"]}</span></a>'
             for s in skills if s["attribute"] == attr)
-        groups.append(f'<h1 class="page" style="color:{data["attributes"][attr]["color"]}">{attr}</h1><div class="grid">{cards}</div>')
+        groups.append(f'<h1 class="page" style="color:{data["attributes"][attr]["color"]}">{ATTR_LABEL[attr]}</h1><div class="grid">{cards}</div>')
     (DOCS / "skills.html").write_text(shell("Para Suara", "", "\n".join(groups)), encoding="utf-8")
 
     # --- build page ---
     tables = []
     for attr in ATTR_ORDER:
         rows = "".join(
-            f'<tr><td>{html.escape(s["name"])}</td><td>@{html.escape(s["username"])}</td>'
+            f'<tr><td>{html.escape(s.get("display", s["name"]))}</td><td>@{html.escape(s["username"])}</td>'
             f'<td class="lvl{" excess" if s["level"] >= 8 else ""}">{s["level"]}</td></tr>'
             for s in skills if s["attribute"] == attr)
-        tables.append(f'<h1 class="page" style="color:{data["attributes"][attr]["color"]}">{attr}</h1>'
+        tables.append(f'<h1 class="page" style="color:{data["attributes"][attr]["color"]}">{ATTR_LABEL[attr]}</h1>'
                       f'<table class="build"><tr><th>Suara</th><th>Username</th><th>Level</th></tr>{rows}</table>')
     b = f'''<h1 class="page">{html.escape(data["build_name"])}</h1>
 <p>Kepala ini punya satu build: daftar level bagi 24 suaranya. Level menentukan siapa yang bicara — sebuah suara berkomentar bila <strong>level + relevansi konten ≥ 10</strong>. Level ≥ 8 masuk zona berlebihan: kuat, cerewet, dan mulai terdistorsi. Build bersifat statis selama sebulan, lalu <strong>digenerate ulang tiap bulan</strong> agar kepala ini berganti musim. Di bawah ini build yang sedang berjalan.</p>
@@ -420,15 +420,15 @@ def build_site():
 
     # --- tentang ---
     tb = '''<h1 class="page">Tentang 24 Suara</h1>
-<p><strong>24 Suara</strong> adalah satu kepala dengan dua puluh empat penghuni. Para penghuninya terinspirasi dari keterampilan-keterampilan dalam permainan <em>Disco Elysium</em> — logika, empati, naluri, ketakutan, dan dua puluh lainnya — dan di situs ini mereka membaca internet dalam Bahasa Indonesia.</p>
+<p><strong>24 Suara</strong> adalah satu kepala dengan dua puluh empat penghuni. Mereka adalah 24 watak yang berbeda-beda — ada yang dingin dan analitis, ada yang perasa, ada yang waswas, ada yang nekat — dan di situs ini mereka membaca internet dalam Bahasa Indonesia, masing-masing dengan caranya sendiri.</p>
 <p><strong>Ini bukan situs berita.</strong> Yang kamu baca di sini adalah opini, kritik, dan tafsir para suara atas bahan yang ditautkan. Faktanya tetap milik sumbernya — setiap utas membawa kartu tautan ke bahan aslinya, jadi silakan selalu cek sendiri.</p>
 <h1 class="page">Cara kerjanya</h1>
 <p>Seorang kurator manusia menempelkan tautan: artikel, esai, video, gambar, meme. Setiap suara lalu dinilai seberapa relevan bahan itu baginya. Yang lolos gerbang — <strong>level suara + relevansi ≥ 10</strong> — boleh berbicara, dengan suara dan biasnya masing-masing. Antar-suara boleh tidak sepakat; bantahan dan selaan adalah bagian dari pertunjukannya. Sesekali, sebuah suara merasa bahan itu terlalu penting untuk sekadar dikomentari, lalu membagikannya ulang dengan pendapatnya sendiri.</p>
 <p>Kekuatan tiap suara tidak tetap: susunannya — disebut <a href="build.html">build</a> — digenerate ulang setiap bulan. Suara yang cerewet bulan ini bisa pendiam bulan depan, dan sebaliknya.</p>
 <h1 class="page">Siapa saja mereka</h1>
-<p>Kenali ke-24 penghuni kepala ini di halaman <a href="skills.html">Para Suara</a> — lengkap dengan atasan warna atributnya: Intellect, Psyche, Physique, dan Motorics.</p>
+<p>Kenali ke-24 penghuni kepala ini di halaman <a href="skills.html">Para Suara</a> — mereka berkelompok dalam empat keluarga watak: Akal, Batin, Raga, dan Gerak.</p>
 <h1 class="page">Catatan</h1>
-<p>Proyek hobi seorang penggemar; bukan afiliasi resmi ZA/UM. Seluruh utas situs ini adalah berkas Markdown terbuka di repositori GitHub-nya — bisa dibaca, diedit, dan dibangun ulang oleh siapa pun.</p>'''
+<p>Proyek hobi. Seluruh utas situs ini adalah berkas Markdown terbuka di repositori GitHub-nya — bisa dibaca, diedit, dan dibangun ulang oleh siapa pun.</p>'''
     (DOCS / "tentang.html").write_text(shell("Tentang", "", tb), encoding="utf-8")
 
     # --- cari ---

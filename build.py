@@ -95,6 +95,7 @@ def parse_thread(path):
         "youtube": fm.get("youtube", ""),
         "image": fm.get("image", ""),
         "image_alt": fm.get("image_alt", ""),
+        "kurator": fm.get("kurator", "").strip().lower() in ("ya", "true", "1"),
         "op_text": "\n\n".join(" ".join(p.split()) for p in sections.get("op", "").split("\n\n") if p.strip()),
         "comments": comments,
         "repost": repost,
@@ -349,17 +350,18 @@ def build_site():
             return datetime.strptime(t["date"] + " " + (t["time"] or "00:00"), "%Y-%m-%d %H:%M")
         except Exception:
             return datetime.min
-    hot = sorted(threads, key=lambda t: (len(t["comments"]), t["date"], t["time"]), reverse=True)
-    latest = max((dt_of(t) for t in threads), default=datetime.min)
-    top24_list = [t for t in threads if dt_of(t) >= latest - timedelta(hours=24)]
+    ramai = sorted(threads, key=lambda t: (len(t["comments"]), t["date"], t["time"]), reverse=True)
+    kurator = [t for t in threads if t["kurator"]]
     def view(name, lst, empty=""):
         inner = "\n".join(feed_item(t, by_slug, by_user, "") for t in lst)
         if not inner:
             inner = f'<p class="count-note">{empty}</p>'
         return f'<div data-view="{name}">{inner}<p class="filternote"></p></div>'
-    views_html = (view("terbaru", threads) + "\n" + view("hot", hot) + "\n"
-                  + view("top24", top24_list, "Belum ada utas dalam 24 jam terakhir."))
-    body = f'''<div class="feedtabs"><button class="feedtab on" data-tab="terbaru">Terbaru</button><button class="feedtab" data-tab="hot">Hot</button><button class="feedtab" data-tab="top24">Top 24 jam</button></div>
+    views_html = (view("terbaru", threads) + "\n" + view("ramai", ramai) + "\n"
+                  + view("kurator", kurator, "Belum ada pilihan kurator."))
+    acak_urls = json.dumps([f'thread/{t["slug"]}.html' for t in threads])
+    body = f'''<div class="feedtabs"><button class="feedtab on" data-tab="terbaru">Terbaru</button><button class="feedtab" data-tab="ramai">Paling Ramai</button><button class="feedtab" data-tab="kurator">Pilihan Kurator</button><button class="acakbtn" id="acakBtn" type="button">Utas Acak</button></div>
+<script>var U={acak_urls};document.getElementById('acakBtn').addEventListener('click',function(){{if(U.length)location.href=U[Math.floor(Math.random()*U.length)];}});</script>
 <div class="tagchips">{chips}</div>
 {views_html}'''
     (DOCS / "index.html").write_text(shell("Feed", "", body), encoding="utf-8")

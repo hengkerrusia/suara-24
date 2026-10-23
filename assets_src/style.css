@@ -38,6 +38,9 @@ nav.main a:hover{color:var(--gold);text-decoration:none}
 .feedtab{background:none;border:none;color:var(--muted);font:inherit;font-size:15px;
   padding:8px 2px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
 .feedtab.on{color:var(--text);border-bottom-color:var(--gold);font-weight:700}
+.acakbtn{background:none;border:none;color:var(--muted);font:inherit;font-size:15px;
+  padding:8px 2px;cursor:pointer;margin-left:auto}
+.acakbtn:hover{color:var(--gold)}
 .filternote{color:var(--muted);font-size:13.5px}
 .topik-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
   padding:13px 2px;border-bottom:1px solid var(--line)}

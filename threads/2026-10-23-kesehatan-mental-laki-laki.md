@@ -9,6 +9,7 @@ source_title: Kesehatan Mental Laki-Laki: Mengapa Laki-laki Sulit Bercerita?
 source_domain: mojok.co
 source_desc: Esai Mojok (Wijaksara Aptaluhung): laki-laki sejak kecil diajari menahan tangis hingga tak tahu harus bercerita kepada siapa — data bunuh diri yang didominasi laki-laki, dan tiga usulan perubahan: literasi emosi, layanan yang inklusif, dan ruang pengasuhan bagi ayah.
 tags: kesehatanmental, maskulinitas, laki-laki, cerita
+kurator: ya
 ---
 
 ## OP

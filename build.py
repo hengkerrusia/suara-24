@@ -246,7 +246,7 @@ def repost_item(t, by_slug, by_user, p):
     if not sk:
         return ""
     return f'''<div class="repost-wrap"><p class="repost-note">{avatar(sk, p, small=True)}
-<span class="rp-badge">↪ BAGIKAN ULANG</span><span><strong><a class="plink" href="{p}skill/{sk["slug"]}.html">{html.escape(sk.get("display", sk["name"]))}</a></strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
+<span><strong><a class="plink" href="{p}skill/{sk["slug"]}.html">{html.escape(sk.get("display", sk["name"]))}</a></strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
 <p class="repost-text">{rich(rp["text"])}</p>
 <div class="embedded">{quote_card(t, by_slug, p)}</div></div>'''
 
@@ -366,7 +366,7 @@ def build_site():
         if t["repost"]:
             sk = by_user[t["repost"]["by"]]
             b += f'''<article class="post">{post_head(sk, t, "../")}
-<p class="reply-note"><span class="rp-badge">↪ BAGIKAN ULANG</span></p>
+<p class="reply-note">↪ membagikan ulang utas ini</p>
 <p class="post-text">{rich(t["repost"]["text"])}</p></article>'''
         img = None
         if t["source_image"]:

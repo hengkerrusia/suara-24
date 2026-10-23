@@ -130,7 +130,6 @@ a.plink:hover .avatar,a.plink:hover .avatar-img{box-shadow:0 0 0 2px var(--gold)
 
 /* repost */
 .repost-wrap{margin:18px 0}
-.rp-badge{font-size:10.5px;letter-spacing:1.5px;color:var(--gold);border:1px solid #4a3d1c;background:#221c0e;border-radius:999px;padding:2px 8px;font-weight:700;white-space:nowrap}
 .repost-note{color:var(--muted);font-size:14px;margin:0 0 8px;display:flex;gap:10px;align-items:center}
 .repost-text{font-size:17.5px;margin:4px 0 12px}
 .repost-text em{color:#fff}

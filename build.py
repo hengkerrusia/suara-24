@@ -127,8 +127,8 @@ def avatar(skill, p, small=False):
 
 
 def post_head(skill, t, p):
-    return f'''<div class="post-head">{avatar(skill, p)}
-<div class="who"><div class="name">{html.escape(skill.get("display", skill["name"]))}</div>
+    return f'''<div class="post-head"><a class="plink" href="{p}skill/{skill["slug"]}.html">{avatar(skill, p)}</a>
+<div class="who"><div class="name"><a class="plink" href="{p}skill/{skill["slug"]}.html">{html.escape(skill.get("display", skill["name"]))}</a></div>
 <div class="handle">@{html.escape(skill["username"])}</div></div>
 <div class="when">{fmt_date(t["date"], t["time"])}</div></div>'''
 
@@ -189,7 +189,7 @@ def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
             reply = (f'<div class="reply-note">menanggapi @{html.escape(rt)}</div>'
                      if rt else "")
             parts.append(f'''<div class="comment d{d}">{avatar(sk, p, small=True)}
-<div class="c-body"><div class="c-who">{html.escape(sk.get("display", sk["name"]))} <span class="handle">@{html.escape(sk["username"])}</span></div>
+<div class="c-body"><div class="c-who"><a class="plink" href="{p}skill/{sk["slug"]}.html">{html.escape(sk.get("display", sk["name"]))}</a> <span class="handle">@{html.escape(sk["username"])}</span></div>
 {reply}<div class="c-text">{rich(c["text"])}</div></div></div>''')
         parts.append('</div>')
     if link_permalink:
@@ -205,7 +205,7 @@ def quote_card(t, by_slug, p):
     img = (f'<img class="q-thumb" src="{p}{html.escape(thumb)}" alt="" loading="lazy">'
            if thumb else "")
     return f'''<article class="quote-card"><a class="card-link" href="{p}thread/{t["slug"]}.html" aria-label="Buka utas"></a>
-{img}<div class="q-body"><div class="q-name">{html.escape(disp)} <span class="handle">@{html.escape(op["username"])}</span></div>
+{img}<div class="q-body"><div class="q-name"><a class="plink" href="{p}skill/{op["slug"]}.html">{html.escape(disp)}</a> <span class="handle">@{html.escape(op["username"])}</span></div>
 <p class="q-text">{html.escape(make_excerpt(t["op_text"], 140))}</p>
 <div class="q-meta">💬 {len(t["comments"])} komentar · Buka utas →</div></div></article>'''
 
@@ -216,7 +216,7 @@ def repost_item(t, by_slug, by_user, p):
     if not sk:
         return ""
     return f'''<div class="repost-wrap"><p class="repost-note">{avatar(sk, p, small=True)}
-<span><strong>{html.escape(sk.get("display", sk["name"]))}</strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
+<span><strong><a class="plink" href="{p}skill/{sk["slug"]}.html">{html.escape(sk.get("display", sk["name"]))}</a></strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
 <p class="repost-text">{rich(rp["text"])}</p>
 <div class="embedded">{quote_card(t, by_slug, p)}</div></div>'''
 
@@ -309,7 +309,6 @@ def build_site():
     all_tags = sorted({tag for t in threads for tag in t["tags"]})
 
     # --- feed ---
-    opts = "".join(f'<option value="{s["slug"]}">{html.escape(s.get("display", s["name"]))} — @{html.escape(s["username"])}</option>' for s in skills)
     chips = " ".join(f'<a href="tag/{html.escape(tag)}.html">#{html.escape(tag)}</a>' for tag in all_tags)
     def dt_of(t):
         try:
@@ -326,10 +325,7 @@ def build_site():
         return f'<div data-view="{name}">{inner}<p class="filternote"></p></div>'
     views_html = (view("terbaru", threads) + "\n" + view("hot", hot) + "\n"
                   + view("top24", top24_list, "Belum ada utas dalam 24 jam terakhir."))
-    body = f'''<div class="intro"><strong>Baru di sini?</strong> Kepala ini dihuni 24 suara. Sang kurator menempelkan tautan — artikel, video, gambar — lalu suara-suara itu membacanya dan berbicara sesuai karakternya: memuji, membantah, menafsir. Yang tampil di feed adalah awal utas; klik untuk membaca percakapannya. <a href="tentang.html">Ini situs apa? →</a></div>
-<div class="filterbar"><label for="skill-filter">Saring suara</label>
-<select id="skill-filter"><option value="">Semua suara</option>{opts}</select></div>
-<div class="feedtabs"><button class="feedtab on" data-tab="terbaru">Terbaru</button><button class="feedtab" data-tab="hot">Hot</button><button class="feedtab" data-tab="top24">Top 24 jam</button></div>
+    body = f'''<div class="feedtabs"><button class="feedtab on" data-tab="terbaru">Terbaru</button><button class="feedtab" data-tab="hot">Hot</button><button class="feedtab" data-tab="top24">Top 24 jam</button></div>
 <div class="tagchips">{chips}</div>
 {views_html}'''
     (DOCS / "index.html").write_text(shell("Feed", "", body), encoding="utf-8")
@@ -365,29 +361,37 @@ def build_site():
 
     # --- skill profiles ---
     for s in skills:
-        acts = []
+        utas, koms, rps = [], [], []
         for t in threads:
-            roles = []
+            def act(role, text, lst, t=t):
+                plain = text.replace("*", "")
+                exc = plain[:200] + ("…" if len(plain) > 200 else "")
+                lst.append(f'''<div class="activity"><div class="role">{html.escape(role)} · {fmt_date(t["date"], t["time"])}</div>
+<div class="excerpt">{html.escape(exc)}</div>
+<a class="permalink" href="../thread/{t["slug"]}.html">Lihat utas →</a></div>''')
             if t["op"] == s["slug"]:
-                roles.append(("Pembuat utas", t["op_text"]))
+                act("Pembuat utas", t["op_text"], utas)
             for c in t["comments"]:
                 if c["by"] == s["username"]:
-                    roles.append(("Komentar" + (f' — menanggapi @{c["reply_to"]}' if c.get("reply_to") else ""), c["text"]))
+                    act("Komentar" + (f' — menanggapi @{c["reply_to"]}' if c.get("reply_to") else ""), c["text"], koms)
             if t["repost"] and t["repost"]["by"] == s["username"]:
-                roles.append(("Membagikan ulang", t["repost"]["text"]))
-            for role, text in roles:
-                plain = text.replace("*", "")
-                excerpt = plain[:200] + ("…" if len(plain) > 200 else "")
-                acts.append(f'''<div class="activity"><div class="role">{html.escape(role)} · {fmt_date(t["date"], t["time"])}</div>
-<div class="excerpt">{html.escape(excerpt)}</div>
-<a class="permalink" href="../thread/{t["slug"]}.html">Lihat utas →</a></div>''')
+                act("Membagikan ulang", t["repost"]["text"], rps)
+        stats = f'<p class="prof-stats">{len(utas)} utas · {len(koms)} komentar · {len(rps)} bagikan ulang</p>'
+        def group(title, lst):
+            return (f'<h1 class="page">{title} ({len(lst)})</h1>'
+                    + ("".join(lst) if lst else '<p class="count-note">Belum ada.</p>'))
+        if utas or koms or rps:
+            sections = group("Utas", utas) + group("Komentar", koms) + group("Bagikan Ulang", rps)
+        else:
+            sections = ('<h1 class="page">Aktivitas</h1>'
+                        '<p class="count-note">Belum bersuara pada periode ini. Kediaman juga data.</p>')
         b = f'''<div class="prof-head">{avatar(s, "../")}
 <div><div class="name" style="font-size:17px;font-weight:700">{html.escape(s.get("display", s["name"]))}<span class="level-badge">Level {s["level"]}</span></div>
 <div class="handle">@{html.escape(s["username"])}</div>
 <div class="attr-label" style="color:{s["color"]}">{html.escape("Suara " + s["name"] + " · " + s["attribute"])}</div></div></div>
 <p class="bio">{html.escape(s["bio"])}</p>
-<h1 class="page">Aktivitas</h1>
-{''.join(acts) if acts else '<p class="count-note">Belum bersuara pada periode ini. Kediaman juga data.</p>'}'''
+{stats}
+{sections}'''
         (DOCS / "skill" / f'{s["slug"]}.html').write_text(shell(s.get("display", s["name"]), "../", b), encoding="utf-8")
 
     groups = []

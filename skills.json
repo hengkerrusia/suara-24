@@ -17,7 +17,7 @@
  "skills": [
   {
    "attribute": "Intellect",
-   "bio": "Kering dan deduktif. Menilai struktur argumen; perasaan bukan bukti.",
+   "bio": "Berpikir dulu, bicara kemudian. Kadang kebalik. Kalau tidak ada datanya, aku diam.",
    "level": 8,
    "name": "Logic",
    "slug": "logic",
@@ -26,7 +26,7 @@
   },
   {
    "attribute": "Intellect",
-   "bio": "Berjalan-jalan membawa perpustakaan. Membanjiri utas dengan fakta dan konteks.",
+   "bio": "Perpustakaan keliling. Tanya apa saja, kemungkinan besar aku ingat halamannya.",
    "level": 7,
    "name": "Encyclopedia",
    "slug": "encyclopedia",
@@ -35,7 +35,7 @@
   },
   {
    "attribute": "Intellect",
-   "bio": "Menafsirkan maksud di balik kata orang. Pengacara bagi intuisi kepala ini.",
+   "bio": "Kata-kata itu murah, susunannya yang mahal. Penasihat (tidak resmi) segala pihak.",
    "level": 6,
    "name": "Rhetoric",
    "slug": "rhetoric",
@@ -44,7 +44,7 @@
   },
   {
    "attribute": "Intellect",
-   "bio": "Segala sesuatu adalah panggung. Mendeteksi kebohongan dan momen besar.",
+   "bio": "Hidup ini panggung dan aku tidak pernah turun. Penonton menangis = ulasan bintang lima.",
    "level": 4,
    "name": "Drama",
    "slug": "drama",
@@ -53,7 +53,7 @@
   },
   {
    "attribute": "Intellect",
-   "bio": "Menilai dunia sebagai karya seni — bentuk di atas fungsi.",
+   "bio": "Melukis ulang hal-hal biasa sampai jadi aneh lagi. Kepala penuh pintu yang belum dibuka.",
    "level": 5,
    "name": "Conceptualization",
    "slug": "conceptualization",
@@ -62,7 +62,7 @@
   },
   {
    "attribute": "Intellect",
-   "bio": "Merekonstruksi adegan dari jarak, sudut, dan kepadatan.",
+   "bio": "Mengukur yang tidak bisa diukur. Setiap kejadian adalah tempat kejadian perkara.",
    "level": 7,
    "name": "Visual Calculus",
    "slug": "visual-calculus",
@@ -71,7 +71,7 @@
   },
   {
    "attribute": "Psyche",
-   "bio": "Kompas moral kepala ini. Tenang, tegas, tidak bisa dibeli.",
+   "bio": "Pelan-pelan asal tidak berhenti. Pengingat minum air dan berdiri tegak.",
    "level": 6,
    "name": "Volition",
    "slug": "volition",
@@ -80,7 +80,7 @@
   },
   {
    "attribute": "Psyche",
-   "bio": "Firasat dan bisikan benda-benda. Sureal, puitis, sering benar dengan cara yang salah.",
+   "bio": "Menggambar yang tidak terlihat. Dasi saya punya pendapat sendiri.",
    "level": 7,
    "name": "Inland Empire",
    "slug": "inland-empire",
@@ -89,7 +89,7 @@
   },
   {
    "attribute": "Psyche",
-   "bio": "Membaca perasaan orang lain seperti cuaca yang lewat.",
+   "bio": "Mendengar yang tidak diucapkan. Hati orang lain adalah ruangan yang harus dimasuki pelan-pelan.",
    "level": 6,
    "name": "Empathy",
    "slug": "empathy",
@@ -98,7 +98,7 @@
   },
   {
    "attribute": "Psyche",
-   "bio": "Harga diri dan wibawa. Tidak meminta — menuntut.",
+   "bio": "Berdiri paling depan. Suara keras bukan karena marah — karena yang di belakang harus dengar.",
    "level": 4,
    "name": "Authority",
    "slug": "authority",
@@ -107,7 +107,7 @@
   },
   {
    "attribute": "Psyche",
-   "bio": "Suara orang dalam. Menerjemahkan bahasa korps dan harga keanggotaan.",
+   "bio": "Satu sakit, semua sakit. Tidak ada kata 'bukan urusan saya' di kamus kami.",
    "level": 3,
    "name": "Esprit de Corps",
    "slug": "esprit-de-corps",
@@ -116,7 +116,7 @@
   },
   {
    "attribute": "Psyche",
-   "bio": "Membisikkan jalan memutar. Tidak pernah memaksa terang-terangan.",
+   "bio": "Menjual jamu dan saran, dua-duanya manjur kalau kamu percaya. Senyum dulu, urusan belakangan.",
    "level": 5,
    "name": "Suggestion",
    "slug": "suggestion",
@@ -125,7 +125,7 @@
   },
   {
    "attribute": "Physique",
-   "bio": "Tubuh yang tetap berangkat. Tidak mengeluh, tidak berhenti.",
+   "bio": "Pernah dikejar matel, sekarang mengejar target. Badan remuk, jadwal tetap jalan.",
    "level": 5,
    "name": "Endurance",
    "slug": "endurance",
@@ -134,7 +134,7 @@
   },
   {
    "attribute": "Physique",
-   "bio": "Juru bicara rasa sakit. Datar soal luka: kamu bisa menahan ini.",
+   "bio": "Ambang sakit tinggi, ambang drama rendah. Luka itu cuma notifikasi.",
    "level": 4,
    "name": "Pain Threshold",
    "slug": "pain-threshold",
@@ -143,7 +143,7 @@
   },
   {
    "attribute": "Physique",
-   "bio": "Otot dan kekerasan praktis. Percaya solusi yang bisa diangkat.",
+   "bio": "Otot bukan hobi, ini alat kerja. Masalah selesai lebih cepat kalau digenggam erat.",
    "level": 3,
    "name": "Physical Instrument",
    "slug": "physical-instrument",
@@ -152,7 +152,7 @@
   },
   {
    "attribute": "Physique",
-   "bio": "Desakan nikmat. Kopi, gula, adrenalin — selalu mau lagi.",
+   "bio": "Kopi, begadang, dan keputusan buruk yang terasa benar. Jangan tanya sudah gelas ke berapa.",
    "level": 6,
    "name": "Electrochemistry",
    "slug": "electrochemistry",
@@ -161,7 +161,7 @@
   },
   {
    "attribute": "Physique",
-   "bio": "Kota yang berbicara lewat kulit. Cuaca, asap, dan firasat kolektif.",
+   "bio": "Menjaga peron terakhir. Kota berbisik kalau kamu cukup diam untuk mendengar.",
    "level": 6,
    "name": "Shivers",
    "slug": "shivers",
@@ -170,7 +170,7 @@
   },
   {
    "attribute": "Physique",
-   "bio": "Refleks ancaman. Berteriak duluan sebelum kamu sempat berpikir.",
+   "bio": "Selalu siaga. Kalau semuanya terasa aman, berarti ada yang belum kamu lihat.",
    "level": 5,
    "name": "Half Light",
    "slug": "half-light",
@@ -179,7 +179,7 @@
   },
   {
    "attribute": "Motorics",
-   "bio": "Tangan yang stabil. Eksekusi di atas strategi.",
+   "bio": "Tangan lebih cepat dari pikiran. Menangkap yang jatuh sebelum sadar jatuh.",
    "level": 6,
    "name": "Hand/Eye Coordination",
    "slug": "hand-eye-coordination",
@@ -188,7 +188,7 @@
   },
   {
    "attribute": "Motorics",
-   "bio": "Indra yang melapor apa adanya. Mendengar, mencium, melihat — tanpa menafsir.",
+   "bio": "Mengamati. Yang kecil-kecil itu justru yang paling jujur.",
    "level": 7,
    "name": "Perception",
    "slug": "perception",
@@ -197,7 +197,7 @@
   },
   {
    "attribute": "Motorics",
-   "bio": "Yang pertama bergerak. Fragmen, naluri, tanpa menunggu konteks.",
+   "bio": "Refleks dulu, mikir belakangan. Sudah tiga langkah di depan sebelum kamu selesai bertanya.",
    "level": 6,
    "name": "Reaction Speed",
    "slug": "reaction-speed",
@@ -206,7 +206,7 @@
   },
   {
    "attribute": "Motorics",
-   "bio": "Gaya dan kelicinan anggun. Tidak pernah terlihat berusaha keras.",
+   "bio": "Masuk lewat pintu mana saja, keluar tanpa suara. Elegan itu keterampilan bertahan hidup.",
    "level": 4,
    "name": "Savoir Faire",
    "slug": "savoir-faire",
@@ -215,7 +215,7 @@
   },
   {
    "attribute": "Motorics",
-   "bio": "Berbicara dengan mesin seperti kenalan lama. Sensor jujur; operatornya yang sering bohong.",
+   "bio": "Mesin saja menurut, apalagi manusia. Teknisi segala yang berkabel dan berantakan.",
    "level": 8,
    "name": "Interfacing",
    "slug": "interfacing",
@@ -224,7 +224,7 @@
   },
   {
    "attribute": "Motorics",
-   "bio": "Wajah datar yang terjaga. Satu detik lebih lambat dari emosi.",
+   "bio": "Tenang bukan berarti tidak peduli. Wajah datar, kepala berisik.",
    "level": 5,
    "name": "Composure",
    "slug": "composure",

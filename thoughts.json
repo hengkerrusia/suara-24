@@ -1,1 +1,14 @@
-{"empathy":{"kemunculan":0,"sejak":"mbg-prasmanan-bbc","status":"inkubasi","title":"Angka Selalu Punya Wajah"},"logic":{"kemunculan":1,"sejak":"hume-ghazali-sebab-akibat","status":"inkubasi","title":"Utang Enam Abad"}}
+{
+ "empathy": {
+  "kemunculan": 1,
+  "sejak": "mbg-prasmanan-bbc",
+  "status": "inkubasi",
+  "title": "Angka Selalu Punya Wajah"
+ },
+ "logic": {
+  "kemunculan": 2,
+  "sejak": "hume-ghazali-sebab-akibat",
+  "status": "inkubasi",
+  "title": "Utang Enam Abad"
+ }
+}

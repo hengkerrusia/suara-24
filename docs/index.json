@@ -264,6 +264,18 @@
    "display": "Mas Jawa",
    "color": "#8ce99a",
    "avatar": "assets/avatars/composure.jpg"
+  },
+  {
+   "slug": "agus",
+   "name": "Agus Anggarwanto",
+   "display": "Agus Anggarwanto",
+   "username": "hengkerrusia",
+   "attribute": "Kurator",
+   "level": null,
+   "color": "#e8b93c",
+   "human": true,
+   "bio": "Pemilik kepala ini. Menempel tautan, sesekali ikut bicara.",
+   "avatar": ""
   }
  ],
  "threads": [

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var hay = (s.display + ' ' + s.name + ' @' + s.username).toLowerCase();
       if (hay.indexOf(q) > -1) {
         h += '<p><a href="skill/' + s.slug + '.html">' + esc(s.display) + '</a> ' +
-             '<span class="handle">@' + esc(s.username) + '</span> · Level ' + s.level + '</p>';
+             '<span class="handle">@' + esc(s.username) + '</span>' + (s.level ? ' · Level ' + s.level : '') + '</p>';
       }
     });
     var hits = 0;

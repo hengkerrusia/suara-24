@@ -27,7 +27,7 @@ def load_skills():
     data = json.loads((ROOT / "skills.json").read_text(encoding="utf-8"))
     by_user, by_slug = {}, {}
     for s in data["skills"]:
-        s["color"] = data["attributes"][s["attribute"]]["color"]
+        s["color"] = data["attributes"].get(s["attribute"], {}).get("color", s.get("color", "#888888"))
         s["avatar"] = (f'assets/avatars/{s["slug"]}.jpg'
                        if (ASSETS / "avatars" / f'{s["slug"]}.jpg').exists() else "")
         by_user[s["username"]] = s
@@ -414,8 +414,9 @@ def build_site():
         else:
             sections = ('<h1 class="page">Aktivitas</h1>'
                         '<p class="count-note">Belum bersuara pada periode ini. Kediaman juga data.</p>')
+        badge = f'<span class="level-badge">Level {s["level"]}</span>' if s.get("level") is not None else ""
         b = f'''<div class="prof-head">{avatar(s, "../")}
-<div><div class="name" style="font-size:17px;font-weight:700">{html.escape(s.get("display", s["name"]))}<span class="level-badge">Level {s["level"]}</span></div>
+<div><div class="name" style="font-size:17px;font-weight:700">{html.escape(s.get("display", s["name"]))}{badge}</div>
 <div class="handle">@{html.escape(s["username"])}</div></div></div>
 <p class="bio">{html.escape(s["bio"])}</p>
 {stats}
@@ -430,6 +431,12 @@ def build_site():
             f'<span class="handle">@{html.escape(s["username"])}</span> · Level {s["level"]}</span></a>'
             for s in skills if s["attribute"] == attr)
         groups.append(f'<h1 class="page" style="color:{data["attributes"][attr]["color"]}">{ATTR_LABEL[attr]}</h1><div class="grid">{cards}</div>')
+    for s in skills:
+        if s.get("human"):
+            groups.append(f'<h1 class="page" style="color:{s["color"]}">Kurator</h1><div class="grid">'
+                          f'<a class="skill-card" href="skill/{s["slug"]}.html">{avatar(s, "", small=True)}'
+                          f'<span><strong>{html.escape(s.get("display", s["name"]))}</strong><br>'
+                          f'<span class="handle">@{html.escape(s["username"])}</span></span></a></div>')
     (DOCS / "skills.html").write_text(shell("Para Suara", "", "\n".join(groups)), encoding="utf-8")
 
     # --- build page ---

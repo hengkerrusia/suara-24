@@ -55,6 +55,12 @@ nav.main a:hover{color:var(--gold);text-decoration:none}
 .q-text{color:#d8d8d2;font-size:14.5px;margin:3px 0 0}
 .q-meta{color:var(--muted);font-size:13px;margin-top:6px}
 
+/* profile links & stats */
+.plink{color:inherit;text-decoration:none}
+.plink:hover{color:var(--gold);text-decoration:none}
+.post .plink,.quote-card .plink{position:relative;z-index:2}
+.prof-stats{color:var(--muted);font-size:14px;margin:2px 0 6px}
+
 /* intro */
 .intro{background:#14131a;border:1px solid #2b2838;border-left:3px solid #b197fc;
   border-radius:12px;padding:13px 16px;margin:16px 0 4px;font-size:15px;color:#d8d8d2}

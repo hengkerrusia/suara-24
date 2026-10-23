@@ -179,17 +179,45 @@ def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
     if t["comments"]:
         parts.append('<div class="comments">')
         op_user = op["username"]
-        depths = {}
-        for c in t["comments"]:
-            sk = by_user.get(c["by"])
-            if not sk:
-                continue
+        cs = [c for c in t["comments"] if c["by"] in by_user]
+        first_idx = {}
+        for i, c in enumerate(cs):
+            first_idx.setdefault(c["by"], i)
+        parents = []
+        for i, c in enumerate(cs):
             rt = c.get("reply_to")
-            d = min(depths[rt] + 1, 3) if rt and rt != op_user and rt in depths else 0
-            depths[c["by"]] = d
+            j = first_idx.get(rt) if rt and rt != op_user else None
+            parents.append(j if j is not None and j != i else None)
+
+        def depth(i, seen=frozenset()):
+            pj = parents[i]
+            if pj is None or pj in seen:
+                return 0
+            return min(3, 1 + depth(pj, seen | {i}))
+
+        children = {}
+        roots = []
+        for i, pj in enumerate(parents):
+            if pj is None:
+                roots.append(i)
+            else:
+                children.setdefault(pj, []).append(i)
+        order = []
+
+        def visit(i):
+            order.append(i)
+            for ch in children.get(i, []):
+                visit(ch)
+
+        for r in roots:
+            visit(r)
+        for i in order:
+            c = cs[i]
+            sk = by_user[c["by"]]
+            rt = c.get("reply_to")
             reply = (f'<div class="reply-note">menanggapi @{html.escape(rt)}</div>'
                      if rt else "")
-            parts.append(f'''<div class="comment d{d}">{avatar(sk, p, small=True)}
+            parts.append(f'''<div class="comment d{depth(i)}">{avatar(sk, p, small=True)}
 <div class="c-body"><div class="c-who"><a class="plink" href="{p}skill/{sk["slug"]}.html">{html.escape(sk.get("display", sk["name"]))}</a> <span class="handle">@{html.escape(sk["username"])}</span></div>
 {reply}<div class="c-text">{rich(c["text"])}</div></div></div>''')
         parts.append('</div>')

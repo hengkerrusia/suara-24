@@ -420,8 +420,12 @@ def build_site():
                         '<p class="count-note">Belum bersuara pada periode ini. Kediaman juga data.</p>')
         badge = f'<span class="level-badge">Level {s["level"]}</span>' if s.get("level") is not None else ""
         th = thoughts.get(s["slug"])
-        thinking = (f'<p class="thinking">💭 Sedang memikirkan: <em>{html.escape(th["title"])}</em></p>'
-                    if th and th.get("status") == "inkubasi" else "")
+        if th and th.get("status") == "inkubasi":
+            thinking = f'<p class="thinking">💭 Sedang memikirkan: <em>{html.escape(th["title"])}</em></p>'
+        elif th and th.get("status") == "matang":
+            thinking = f'<p class="thinking">💭 Sudah jadi cara berpikirnya: <em>{html.escape(th["title"])}</em></p>'
+        else:
+            thinking = ""
         b = f'''<div class="prof-head">{avatar(s, "../")}
 <div><div class="name" style="font-size:17px;font-weight:700">{html.escape(s.get("display", s["name"]))}{badge}</div>
 <div class="handle">@{html.escape(s["username"])}</div></div></div>

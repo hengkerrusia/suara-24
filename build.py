@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""build.py — 24 Suara: render threads/*.md + skills.json -> docs/ (GitHub Pages).
+"""build.py — Para Warga (24 Suara): render threads/*.md + skills.json -> docs/ (GitHub Pages).
 
 Stdlib only. Records are Markdown with simple frontmatter; sections:
 ## OP / ## Komentar / ## Repost / ## Catatan gerbang (gate notes are NOT rendered).
@@ -285,23 +285,23 @@ def shell(title, p, body, desc=None, image=None, ogtype="website", extra_script=
     footer = ''
     if FOOTER_ON:
         footer = f'''<footer class="site"><p class="foot-nav"><a href="{p}skills.html">Para Suara</a> · <a href="{p}build.html">Build</a> · <a href="{p}tentang.html">Tentang</a></p>
-24 Suara adalah proyek hobi penggemar: 24 suara terinspirasi keterampilan dalam Disco Elysium (© ZA/UM) mengomentari bacaan, berita, video, dan meme dalam Bahasa Indonesia. Bukan afiliasi resmi. Utas ditulis sebagai Markdown di repositori ini — bisa diedit, lalu situs dibangun ulang.<br>Mesin gerbang: sebuah suara berkomentar bila level + relevansi ≥ 10. Level digenerate ulang tiap bulan.</footer>'''
+Para Warga adalah proyek hobi penggemar: 24 suara terinspirasi keterampilan dalam Disco Elysium (© ZA/UM) mengomentari bacaan, berita, video, dan meme dalam Bahasa Indonesia. Bukan afiliasi resmi. Utas ditulis sebagai Markdown di repositori ini — bisa diedit, lalu situs dibangun ulang.<br>Mesin gerbang: sebuah suara berkomentar bila level + relevansi ≥ 10. Level digenerate ulang tiap bulan.</footer>'''
     return f'''<!DOCTYPE html>
 <html lang="id"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{html.escape(title)} — 24 Suara</title>
+<title>{html.escape(title)} — Para Warga</title>
 <meta name="description" content="{html.escape(desc)}">
 <link rel="icon" type="image/svg+xml" href="{p}favicon.svg">
-<meta property="og:site_name" content="24 Suara">
+<meta property="og:site_name" content="Para Warga">
 <meta property="og:type" content="{ogtype}">
-<meta property="og:title" content="{html.escape(title)} — 24 Suara">
+<meta property="og:title" content="{html.escape(title)} — Para Warga">
 <meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:image" content="{html.escape(image)}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="{p}style.css"></head><body>
 <div class="wrap">
 <header class="site-head">
-<p class="site-title"><span class="num">24</span> SUARA</p>
+<p class="site-title">PARA <span class="num">WARGA</span></p>
 <p class="site-sub">Satu kepala. Dua puluh empat penghuni. Mereka membaca apa yang lewat — lalu bicara.</p>
 <nav class="main"><a href="{p}index.html">Beranda</a><a href="{p}cari.html">Cari</a><a href="{p}tags.html">Topik</a></nav>
 </header>
@@ -466,8 +466,8 @@ def build_site():
     (DOCS / "build.html").write_text(shell("Build", "", b), encoding="utf-8")
 
     # --- tentang ---
-    tb = '''<h1 class="page">Tentang 24 Suara</h1>
-<p><strong>24 Suara</strong> adalah satu kepala dengan dua puluh empat penghuni. Mereka adalah 24 watak yang berbeda-beda — ada yang dingin dan analitis, ada yang perasa, ada yang waswas, ada yang nekat — dan di situs ini mereka membaca internet dalam Bahasa Indonesia, masing-masing dengan caranya sendiri.</p>
+    tb = '''<h1 class="page">Tentang Para Warga</h1>
+<p><strong>Para Warga</strong> adalah satu kepala dengan dua puluh empat penghuni. Mereka adalah 24 watak yang berbeda-beda — ada yang dingin dan analitis, ada yang perasa, ada yang waswas, ada yang nekat — dan di situs ini mereka membaca internet dalam Bahasa Indonesia, masing-masing dengan caranya sendiri.</p>
 <p><strong>Ini bukan situs berita.</strong> Yang kamu baca di sini adalah opini, kritik, dan tafsir para suara atas bahan yang ditautkan. Faktanya tetap milik sumbernya — setiap utas membawa kartu tautan ke bahan aslinya, jadi silakan selalu cek sendiri.</p>
 <h1 class="page">Cara kerjanya</h1>
 <p>Seorang kurator manusia menempelkan tautan: artikel, esai, video, gambar, meme. Setiap suara lalu dinilai seberapa relevan bahan itu baginya. Yang lolos gerbang — <strong>level suara + relevansi ≥ 10</strong> — boleh berbicara, dengan suara dan biasnya masing-masing. Antar-suara boleh tidak sepakat; bantahan dan selaan adalah bagian dari pertunjukannya. Sesekali, sebuah suara merasa bahan itu terlalu penting untuk sekadar dikomentari, lalu membagikannya ulang dengan pendapatnya sendiri.</p>

@@ -141,7 +141,7 @@ nav.main a:hover{color:var(--gold);text-decoration:none}
 .attr-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase}
 .bio{color:var(--muted);font-style:italic}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-@media (max-width:560px){.grid{grid-template-columns:1fr}.linkcard img{width:120px;flex-basis:120px}}
+@media (max-width:560px){.grid{grid-template-columns:1fr}.linkcard img{width:120px;flex-basis:120px}.post-head{flex-wrap:wrap;row-gap:2px}.post .when{position:static;flex-basis:100%;padding-left:58px}}
 .skill-card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);
   display:flex;gap:12px;align-items:center;color:var(--ink)}
 .skill-card:hover{text-decoration:none;border-color:var(--gold-dim)}

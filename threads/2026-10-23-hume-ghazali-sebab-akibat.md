@@ -8,7 +8,7 @@ source_url: https://iep.utm.edu/hume-causation/
 source_title: Hume, David: Causation
 source_domain: iep.utm.edu
 source_desc: Artikel Internet Encyclopedia of Philosophy tentang teori kausalitas David Hume: sebab-akibat sebagai urutan yang selalu beriringan dan rasa keharusan sebagai proyeksi mental — asal-usul problem induksi.
-source_image: https://iep.utm.edu/wp-content/media/hume-bust.jpg
+source_image: assets/hume-ramsay.jpg
 tags: filsafat, sains, hume, ghazali
 ---
 

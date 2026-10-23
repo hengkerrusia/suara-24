@@ -63,6 +63,7 @@ a.plink .avatar,a.plink .avatar-img{transition:box-shadow .18s ease}
 a.plink:hover .avatar,a.plink:hover .avatar-img{box-shadow:0 0 0 2px var(--gold),0 0 14px rgba(232,185,60,.45)}
 .post .plink,.quote-card .plink{position:relative;z-index:2}
 .prof-stats{color:var(--muted);font-size:14px;margin:2px 0 6px}
+.thinking{color:var(--muted);font-size:14.5px;font-style:italic;margin:0 0 4px}
 
 /* intro */
 .intro{background:#14131a;border:1px solid #2b2838;border-left:3px solid #b197fc;

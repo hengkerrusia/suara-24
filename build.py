@@ -321,6 +321,9 @@ def feed_item(t, by_slug, by_user, p):
 
 def build_site():
     data, by_user, by_slug = load_skills()
+    thoughts = {}
+    if (ROOT / "thoughts.json").exists():
+        thoughts = json.loads((ROOT / "thoughts.json").read_text(encoding="utf-8"))
     skills = data["skills"]
     threads = [parse_thread(f) for f in sorted(THREADS.glob("*.md"))]
     threads.sort(key=lambda t: (t["date"], t["time"]), reverse=True)
@@ -416,11 +419,14 @@ def build_site():
             sections = ('<h1 class="page">Aktivitas</h1>'
                         '<p class="count-note">Belum bersuara pada periode ini. Kediaman juga data.</p>')
         badge = f'<span class="level-badge">Level {s["level"]}</span>' if s.get("level") is not None else ""
+        th = thoughts.get(s["slug"])
+        thinking = (f'<p class="thinking">💭 Sedang memikirkan: <em>{html.escape(th["title"])}</em></p>'
+                    if th and th.get("status") == "inkubasi" else "")
         b = f'''<div class="prof-head">{avatar(s, "../")}
 <div><div class="name" style="font-size:17px;font-weight:700">{html.escape(s.get("display", s["name"]))}{badge}</div>
 <div class="handle">@{html.escape(s["username"])}</div></div></div>
 <p class="bio">{html.escape(s["bio"])}</p>
-{stats}
+{thinking}{stats}
 {sections}'''
         (DOCS / "skill" / f'{s["slug"]}.html').write_text(shell(s.get("display", s["name"]), "../", b), encoding="utf-8")
 

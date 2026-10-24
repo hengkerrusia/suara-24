@@ -11,7 +11,6 @@ source_desc:
 image: assets/bundaran-hi-greenpeace.jpg
 image_alt: Tangkapan layar Threads maya_ummu.yusuf — kritik atas aksi Greenpeace memanjat Monumen Selamat Datang Bundaran HI membentangkan spanduk "Apa kerja pemerintah?", dengan dalil An-Nisa 59, Ar-Rum 41, dan Thaha 124.
 tags: demo, agama, akuntabilitas, jakarta
-kurator: ya
 ---
 
 ## OP

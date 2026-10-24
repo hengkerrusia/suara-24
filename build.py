@@ -95,7 +95,6 @@ def parse_thread(path):
         "youtube": fm.get("youtube", ""),
         "image": fm.get("image", ""),
         "image_alt": fm.get("image_alt", ""),
-        "kurator": fm.get("kurator", "").strip().lower() in ("ya", "true", "1"),
         "op_text": "\n\n".join(" ".join(p.split()) for p in sections.get("op", "").split("\n\n") if p.strip()),
         "comments": comments,
         "repost": repost,
@@ -350,17 +349,18 @@ def build_site():
             return datetime.strptime(t["date"] + " " + (t["time"] or "00:00"), "%Y-%m-%d %H:%M")
         except Exception:
             return datetime.min
-    ramai = sorted(threads, key=lambda t: (len(t["comments"]), t["date"], t["time"]), reverse=True)
-    kurator = [t for t in threads if t["kurator"]]
+    human_slug = next((s["slug"] for s in skills if s.get("human")), "agus")
+    ronda = [t for t in threads if t["op"] != human_slug]
+    warung = [t for t in threads if t["op"] == human_slug]
     def view(name, lst, empty=""):
         inner = "\n".join(feed_item(t, by_slug, by_user, "") for t in lst)
         if not inner:
             inner = f'<p class="count-note">{empty}</p>'
         return f'<div data-view="{name}">{inner}<p class="filternote"></p></div>'
-    views_html = (view("terbaru", threads) + "\n" + view("ramai", ramai) + "\n"
-                  + view("kurator", kurator, "Belum ada pilihan kurator."))
+    views_html = (view("ronda", ronda) + "\n"
+                  + view("warung", warung, "Belum ada utas dari Kurator."))
     acak_urls = json.dumps([f'thread/{t["slug"]}.html' for t in threads])
-    body = f'''<div class="feedtabs"><button class="feedtab on" data-tab="terbaru">Terbaru</button><button class="feedtab" data-tab="ramai">Paling Ramai</button><button class="feedtab" data-tab="kurator">Pilihan Kurator</button><button class="acakbtn" id="acakBtn" type="button">Utas Acak</button></div>
+    body = f'''<div class="feedtabs"><button class="feedtab on" data-tab="ronda">Pos Ronda</button><button class="feedtab" data-tab="warung">Warung Kopi</button><button class="acakbtn" id="acakBtn" type="button">Utas Acak</button></div>
 <script>var U={acak_urls};document.getElementById('acakBtn').addEventListener('click',function(){{if(U.length)location.href=U[Math.floor(Math.random()*U.length)];}});</script>
 <div class="tagchips">{chips}</div>
 {views_html}'''

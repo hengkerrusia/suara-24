@@ -9,7 +9,6 @@ source_title: Aksi Asing setelah Prabowo Sebut Tak Takut MSCI
 source_domain: investor.id
 source_desc: Investor asing melancarkan aksi jual bersih (net sell) bernilai besar mencapai Rp 1,4 triliun di seluruh pasar Bursa Efek Indonesia (BEI), Kamis (22/10/2026), atau sehari setelah Presiden Prabowo Subianto mengatakan tidak takut MSCI.
 tags: ekonomi, saham, politik
-kurator: ya
 ---
 
 ## OP

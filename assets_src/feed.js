@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var views = {};
   document.querySelectorAll('[data-view]').forEach(function (el) { views[el.getAttribute('data-view')] = el; });
   var sel = document.getElementById('skill-filter');
-  var cur = 'terbaru';
+  var cur = 'ronda';
   function apply() {
     Object.keys(views).forEach(function (k) { views[k].style.display = (k === cur) ? '' : 'none'; });
     tabs.forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-tab') === cur); });

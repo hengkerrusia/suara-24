@@ -182,13 +182,20 @@ def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
         parts.append('<div class="comments">')
         op_user = op["username"]
         cs = [c for c in t["comments"] if c["by"] in by_user]
-        first_idx = {}
-        for i, c in enumerate(cs):
-            first_idx.setdefault(c["by"], i)
         parents = []
         for i, c in enumerate(cs):
             rt = c.get("reply_to")
-            j = first_idx.get(rt) if rt and rt != op_user else None
+            # Parent = komentar terakhir oleh rt SEBELUM i. Bila rt adalah
+            # penulis OP dan belum ada komentar darinya, itu balasan ke OP
+            # (parent None). Ini yang membedakan balasan ke OP vs balasan
+            # ke komentar kurator (Seksi 12): dulu rt == op_user selalu
+            # dianggap balasan ke OP, sehingga timpalian ke kurator jadi d0.
+            j = None
+            if rt:
+                for k in range(i - 1, -1, -1):
+                    if cs[k]["by"] == rt:
+                        j = k
+                        break
             parents.append(j if j is not None and j != i else None)
 
         def depth(i, seen=frozenset()):

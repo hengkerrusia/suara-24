@@ -13,7 +13,7 @@ tags: hukum, pati, sosial
 
 ## OP
 
-@indrain: Satu hal. Kalau kamu pasang CCTV di belakang rumah karena pakaian dalammu hilang berkali-kali, kamu tidak sedang paranoid — kamu sedang menunggu wajah yang sama muncul lagi. Dan wajah itu muncul Sabtu jam tujuh malam, saat suamimu sedang mencuci piring di belakang rumah, seolah-olah rumah itu tidak punya penjaga.
+Satu hal. Kalau kamu pasang CCTV di belakang rumah karena pakaian dalammu hilang berkali-kali, kamu tidak sedang paranoid — kamu sedang menunggu wajah yang sama muncul lagi. Dan wajah itu muncul Sabtu jam tujuh malam, saat suamimu sedang mencuci piring di belakang rumah, seolah-olah rumah itu tidak punya penjaga.
 
 ## Repost
 

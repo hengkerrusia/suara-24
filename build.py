@@ -162,10 +162,11 @@ def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
         rp = ""
         if t["repost"]:
             rp = f' · ↪ dibagikan ulang oleh @{html.escape(t["repost"]["by"])}'
+        op_excerpt = f'<p class="post-text">{html.escape(make_excerpt(t["op_text"], 240))}</p>'
         parts = ['<article class="post compact">',
                  f'<a class="card-link" href="{p}thread/{t["slug"]}.html" aria-label="Buka utas"></a>',
                  post_head(op, t, p),
-                 op_html, media_html(t, p)]
+                 op_excerpt, media_html(t, p)]
         if t["tags"]:
             chips = " ".join(f'<a href="{p}tag/{html.escape(tag)}.html">#{html.escape(tag)}</a>' for tag in t["tags"])
             parts.append(f'<div class="tags">{chips}</div>')
@@ -247,7 +248,7 @@ def repost_item(t, by_slug, by_user, p):
         return ""
     return f'''<div class="repost-wrap"><p class="repost-note">{avatar(sk, p, small=True)}
 <span><strong><a class="plink" href="{p}user/{sk["username"]}.html">{html.escape(sk.get("display", sk["name"]))}</a></strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
-<p class="repost-text">{rich(rp["text"])}</p>
+<p class="repost-text">{html.escape(make_excerpt(rp["text"], 240))}</p>
 <div class="embedded">{quote_card(t, by_slug, p)}</div></div>'''
 
 

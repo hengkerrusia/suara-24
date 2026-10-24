@@ -246,9 +246,16 @@ def repost_item(t, by_slug, by_user, p):
     sk = by_user.get(rp["by"])
     if not sk:
         return ""
+    plain = " ".join(rp["text"].replace("*", "").split())
+    if len(plain) <= 240:
+        body = f'<p class="repost-text">{rich(rp["text"])}</p>'
+    else:
+        body = (f'<p class="repost-text rp-toggle">'
+                f'<span class="rp-short">{html.escape(make_excerpt(rp["text"], 240))} <span class="rp-hint">selengkapnya</span></span>'
+                f'<span class="rp-full" hidden>{rich(rp["text"])} <span class="rp-hint">ciutkan</span></span></p>')
     return f'''<div class="repost-wrap"><p class="repost-note">{avatar(sk, p, small=True)}
 <span><strong><a class="plink" href="{p}user/{sk["username"]}.html">{html.escape(sk.get("display", sk["name"]))}</a></strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
-<p class="repost-text"><a href="{p}thread/{t["slug"]}.html">{html.escape(make_excerpt(rp["text"], 240))}</a></p>
+{body}
 <div class="embedded">{quote_card(t, by_slug, p)}</div></div>'''
 
 

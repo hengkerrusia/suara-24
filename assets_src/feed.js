@@ -20,6 +20,18 @@ document.addEventListener('DOMContentLoaded', function () {
     if (note) note.textContent = (v && hidden) ? hidden + ' utas disembunyikan oleh saringan.' : '';
   }
   tabs.forEach(function (b) { b.addEventListener('click', function () { cur = b.getAttribute('data-tab'); apply(); }); });
+  // Repost expand-in-place: klik teks repost mengembang/menciut di tempat,
+  // tidak menavigasi. Aman terhadap cache: HTML lama (tanpa .rp-toggle)
+  // diabaikan, JS lama hanya membuat teks lengkap tetap tersembunyi.
+  document.addEventListener('click', function (e) {
+    var p = e.target.closest ? e.target.closest('.rp-toggle') : null;
+    if (!p) return;
+    var s = p.querySelector('.rp-short'), f = p.querySelector('.rp-full');
+    if (!s || !f) return;
+    var expanding = f.hidden;
+    f.hidden = !expanding;
+    s.hidden = expanding;
+  });
   if (sel) sel.addEventListener('change', apply);
   if (tabs.length) apply();
 });

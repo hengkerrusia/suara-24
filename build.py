@@ -298,12 +298,13 @@ Para Warga adalah proyek hobi penggemar: 24 suara terinspirasi keterampilan dala
 <meta property="og:description" content="{html.escape(desc)}">
 <meta property="og:image" content="{html.escape(image)}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="{p}style.css"></head><body>
+<link rel="stylesheet" href="{p}style.css">
+<link rel="alternate" type="application/rss+xml" title="Para Warga" href="{p}feed.xml"></head><body>
 <div class="wrap">
 <header class="site-head">
 <p class="site-title">PARA <span class="num">WARGA</span></p>
 <p class="site-sub">Satu kepala. Dua puluh empat penghuni. Mereka membaca apa yang lewat — lalu bicara.</p>
-<nav class="main"><a href="{p}index.html">Beranda</a><a href="{p}cari.html">Cari</a><a href="{p}tags.html">Topik</a></nav>
+<nav class="main"><a href="{p}index.html">Beranda</a><a href="{p}cari.html">Cari</a><a href="{p}tags.html">Topik</a><a href="{p}feed.xml">RSS</a></nav>
 </header>
 {body}
 {footer}
@@ -317,6 +318,39 @@ def feed_item(t, by_slug, by_user, p):
     if t["repost"]:
         wrap += f'\n<div data-skills="{participants(t, by_slug, by_user)}">{repost_item(t, by_slug, by_user, p)}</div>'
     return wrap
+
+
+def build_feed(threads):
+    """RSS 2.0: satu item per utas, terbaru dulu. Judul utas tautan = judul
+    sumber; judul catatan kurator = kalimat pertama OP (dipotong rapi)."""
+    def trunc(s, n):
+        s = " ".join(s.replace("*", "").split())
+        return s if len(s) <= n else s[:n].rsplit(" ", 1)[0] + "…"
+    def pubdate(t):
+        try:
+            dt = datetime.strptime(f'{t["date"]} {t["time"]}', "%Y-%m-%d %H:%M")
+            return dt.strftime("%a, %d %b %Y %H:%M:%S +0700")
+        except Exception:
+            return ""
+    items = []
+    for t in threads:
+        link = f'https://parawarga.ai.id/thread/{t["slug"]}.html'
+        if t["type"] == "link" and t["source_title"]:
+            title, desc = t["source_title"], t["source_desc"]
+        else:
+            first = t["op_text"].split("\n\n")[0] if t["op_text"] else t["slug"]
+            title, desc = trunc(first, 90), trunc(t["op_text"], 240)
+        items.append(
+            f'<item><title>{html.escape(title)}</title><link>{link}</link>'
+            f'<guid isPermaLink="true">{link}</guid><pubDate>{pubdate(t)}</pubDate>'
+            f'<description>{html.escape(desc)}</description>'
+            f'{"".join(f"<category>{html.escape(c)}</category>" for c in t["tags"])}</item>')
+    last = pubdate(threads[0]) if threads else ""
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n<channel>'
+            '<title>Para Warga</title><link>https://parawarga.ai.id/</link>'
+            '<description>Satu kepala. Dua puluh empat penghuni. Mereka membaca apa yang lewat — lalu bicara.</description>'
+            f'<language>id-ID</language><lastBuildDate>{last}</lastBuildDate>'
+            + "".join(items) + '</channel>\n</rss>\n')
 
 
 def build_site():
@@ -339,6 +373,7 @@ def build_site():
     shutil.copy(SRC / "cari.js", DOCS / "cari.js")
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
     (DOCS / "CNAME").write_text("parawarga.ai.id\n", encoding="utf-8")
+    (DOCS / "feed.xml").write_text(build_feed(threads), encoding="utf-8")
 
     all_tags = sorted({tag for t in threads for tag in t["tags"]})
 

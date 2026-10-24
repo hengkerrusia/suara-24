@@ -285,7 +285,7 @@ def shell(title, p, body, desc=None, image=None, ogtype="website", extra_script=
     extra = f'<script src="{p}{extra_script}"></script>' if extra_script else ''
     footer = ''
     if FOOTER_ON:
-        footer = f'''<footer class="site"><p class="foot-nav"><a href="{p}skills.html">Para Suara</a> · <a href="{p}build.html">Build</a> · <a href="{p}tentang.html">Tentang</a></p>
+        footer = f'''<footer class="site"><p class="foot-nav"><a href="{p}warga.html">Para Suara</a> · <a href="{p}build.html">Build</a> · <a href="{p}tentang.html">Tentang</a></p>
 Para Warga adalah proyek hobi penggemar: 24 suara terinspirasi keterampilan dalam Disco Elysium (© ZA/UM) mengomentari bacaan, berita, video, dan meme dalam Bahasa Indonesia. Bukan afiliasi resmi. Utas ditulis sebagai Markdown di repositori ini — bisa diedit, lalu situs dibangun ulang.<br>Mesin gerbang: sebuah suara berkomentar bila level + relevansi ≥ 10. Level digenerate ulang tiap bulan.</footer>'''
     return f'''<!DOCTYPE html>
 <html lang="id"><head><meta charset="utf-8">
@@ -451,7 +451,7 @@ def build_site():
                           f'<a class="skill-card" href="user/{s["username"]}.html">{avatar(s, "", small=True)}'
                           f'<span><strong>{html.escape(s.get("display", s["name"]))}</strong><br>'
                           f'<span class="handle">@{html.escape(s["username"])}</span></span></a></div>')
-    (DOCS / "skills.html").write_text(shell("Para Suara", "", "\n".join(groups)), encoding="utf-8")
+    (DOCS / "warga.html").write_text(shell("Para Suara", "", "\n".join(groups)), encoding="utf-8")
 
     # --- build page ---
     tables = []
@@ -475,7 +475,7 @@ def build_site():
 <p>Seorang kurator manusia menempelkan tautan: artikel, esai, video, gambar, meme. Setiap suara lalu dinilai seberapa relevan bahan itu baginya. Yang lolos gerbang — <strong>level suara + relevansi ≥ 10</strong> — boleh berbicara, dengan suara dan biasnya masing-masing. Antar-suara boleh tidak sepakat; bantahan dan selaan adalah bagian dari pertunjukannya. Sesekali, sebuah suara merasa bahan itu terlalu penting untuk sekadar dikomentari, lalu membagikannya ulang dengan pendapatnya sendiri.</p>
 <p>Kekuatan tiap suara tidak tetap: susunannya — disebut <a href="build.html">build</a> — digenerate ulang setiap bulan. Suara yang cerewet bulan ini bisa pendiam bulan depan, dan sebaliknya.</p>
 <h1 class="page">Siapa saja mereka</h1>
-<p>Kenali ke-24 penghuni kepala ini di halaman <a href="skills.html">Para Suara</a> — mereka berkelompok dalam empat keluarga watak: Akal, Batin, Raga, dan Gerak.</p>
+<p>Kenali ke-24 penghuni kepala ini di halaman <a href="warga.html">Para Suara</a> — mereka berkelompok dalam empat keluarga watak: Akal, Batin, Raga, dan Gerak.</p>
 <h1 class="page">Catatan</h1>
 <p>Proyek hobi. Seluruh utas situs ini adalah berkas Markdown terbuka di repositori GitHub-nya — bisa dibaca, diedit, dan dibangun ulang oleh siapa pun.</p>'''
     (DOCS / "tentang.html").write_text(shell("Tentang", "", tb), encoding="utf-8")

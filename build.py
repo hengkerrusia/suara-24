@@ -129,8 +129,8 @@ def avatar(skill, p, small=False):
 
 
 def post_head(skill, t, p):
-    return f'''<div class="post-head"><a class="plink" href="{p}skill/{skill["slug"]}.html">{avatar(skill, p)}</a>
-<div class="who"><div class="name"><a class="plink" href="{p}skill/{skill["slug"]}.html">{html.escape(skill.get("display", skill["name"]))}</a></div>
+    return f'''<div class="post-head"><a class="plink" href="{p}user/{skill["username"]}.html">{avatar(skill, p)}</a>
+<div class="who"><div class="name"><a class="plink" href="{p}user/{skill["username"]}.html">{html.escape(skill.get("display", skill["name"]))}</a></div>
 <div class="handle">@{html.escape(skill["username"])}</div></div>
 <div class="when">{fmt_date(t["date"], t["time"])}</div></div>'''
 
@@ -220,7 +220,7 @@ def thread_card(t, by_slug, by_user, p, link_permalink=True, compact=False):
             reply = (f'<div class="reply-note">menanggapi @{html.escape(rt)}</div>'
                      if rt else "")
             parts.append(f'''<div class="comment d{depth(i)}">{avatar(sk, p, small=True)}
-<div class="c-body"><div class="c-who"><a class="plink" href="{p}skill/{sk["slug"]}.html">{html.escape(sk.get("display", sk["name"]))}</a> <span class="handle">@{html.escape(sk["username"])}</span></div>
+<div class="c-body"><div class="c-who"><a class="plink" href="{p}user/{sk["username"]}.html">{html.escape(sk.get("display", sk["name"]))}</a> <span class="handle">@{html.escape(sk["username"])}</span></div>
 {reply}<div class="c-text">{rich(c["text"])}</div></div></div>''')
         parts.append('</div>')
     if link_permalink:
@@ -236,7 +236,7 @@ def quote_card(t, by_slug, p):
     img = (f'<img class="q-thumb" src="{p}{html.escape(thumb)}" alt="" loading="lazy">'
            if thumb else "")
     return f'''<article class="quote-card"><a class="card-link" href="{p}thread/{t["slug"]}.html" aria-label="Buka utas"></a>
-{img}<div class="q-body"><div class="q-name"><a class="plink" href="{p}skill/{op["slug"]}.html">{html.escape(disp)}</a> <span class="handle">@{html.escape(op["username"])}</span></div>
+{img}<div class="q-body"><div class="q-name"><a class="plink" href="{p}user/{op["username"]}.html">{html.escape(disp)}</a> <span class="handle">@{html.escape(op["username"])}</span></div>
 <p class="q-text">{html.escape(make_excerpt(t["op_text"], 140))}</p>
 <div class="q-meta">💬 {len(t["comments"])} komentar · Buka utas →</div></div></article>'''
 
@@ -247,7 +247,7 @@ def repost_item(t, by_slug, by_user, p):
     if not sk:
         return ""
     return f'''<div class="repost-wrap"><p class="repost-note">{avatar(sk, p, small=True)}
-<span><strong><a class="plink" href="{p}skill/{sk["slug"]}.html">{html.escape(sk.get("display", sk["name"]))}</a></strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
+<span><strong><a class="plink" href="{p}user/{sk["username"]}.html">{html.escape(sk.get("display", sk["name"]))}</a></strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
 <p class="repost-text">{rich(rp["text"])}</p>
 <div class="embedded">{quote_card(t, by_slug, p)}</div></div>'''
 
@@ -331,7 +331,7 @@ def build_site():
 
     if DOCS.exists():
         shutil.rmtree(DOCS)
-    for d in ["thread", "tag", "skill"]:
+    for d in ["thread", "tag", "user"]:
         (DOCS / d).mkdir(parents=True)
     shutil.copytree(ASSETS, DOCS / "assets")
     shutil.copy(SRC / "style.css", DOCS / "style.css")
@@ -435,12 +435,12 @@ def build_site():
 <p class="bio">{html.escape(s["bio"])}</p>
 {thinking}{stats}
 {sections}'''
-        (DOCS / "skill" / f'{s["slug"]}.html').write_text(shell(s.get("display", s["name"]), "../", b), encoding="utf-8")
+        (DOCS / "user" / f'{s["username"]}.html').write_text(shell(s.get("display", s["name"]), "../", b), encoding="utf-8")
 
     groups = []
     for attr in ATTR_ORDER:
         cards = "".join(
-            f'<a class="skill-card" href="skill/{s["slug"]}.html">{avatar(s, "", small=True)}'
+            f'<a class="skill-card" href="user/{s["username"]}.html">{avatar(s, "", small=True)}'
             f'<span><strong>{html.escape(s.get("display", s["name"]))}</strong><br>'
             f'<span class="handle">@{html.escape(s["username"])}</span> · Level {s["level"]}</span></a>'
             for s in skills if s["attribute"] == attr)
@@ -448,7 +448,7 @@ def build_site():
     for s in skills:
         if s.get("human"):
             groups.append(f'<h1 class="page" style="color:{s["color"]}">Kurator</h1><div class="grid">'
-                          f'<a class="skill-card" href="skill/{s["slug"]}.html">{avatar(s, "", small=True)}'
+                          f'<a class="skill-card" href="user/{s["username"]}.html">{avatar(s, "", small=True)}'
                           f'<span><strong>{html.escape(s.get("display", s["name"]))}</strong><br>'
                           f'<span class="handle">@{html.escape(s["username"])}</span></span></a></div>')
     (DOCS / "skills.html").write_text(shell("Para Suara", "", "\n".join(groups)), encoding="utf-8")

@@ -353,6 +353,34 @@ def build_feed(threads):
             + "".join(items) + '</channel>\n</rss>\n')
 
 
+def build_sitemap(threads, skills, by_user, all_tags):
+    """Sitemap XML: beranda + semua halaman utas, tag, profil, dan statis.
+    lastmod halaman tag/profil = tanggal utas terbaru yang menyentuhnya."""
+    from urllib.parse import quote
+    base = "https://parawarga.ai.id"
+    latest = max((t["date"] for t in threads), default="")
+    urls = [(f"{base}/", latest, "1.0")]
+    for t in threads:
+        urls.append((f'{base}/thread/{t["slug"]}.html', t["date"], "0.8"))
+    for tag in all_tags:
+        d = max((t["date"] for t in threads if tag in t["tags"]), default=latest)
+        urls.append((f"{base}/tag/{quote(tag)}.html", d, "0.6"))
+    for s in skills:
+        slug, user = s["slug"], s["username"]
+        d = max([t["date"] for t in threads
+                 if t["op"] == slug or any(c["by"] == user for c in t["comments"])
+                 or (t["repost"] and t["repost"]["by"] == user)], default=latest)
+        urls.append((f"{base}/user/{user}.html", d, "0.6"))
+    for p in ["warga.html", "build.html", "tentang.html", "cari.html", "tags.html"]:
+        urls.append((f"{base}/{p}", latest, "0.5"))
+    body = "".join(
+        f"<url><loc>{loc}</loc><lastmod>{lm}</lastmod><priority>{pr}</priority></url>"
+        for loc, lm, pr in urls if lm)
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+            + body + '</urlset>\n')
+
+
 def build_site():
     data, by_user, by_slug = load_skills()
     thoughts = {}
@@ -374,8 +402,12 @@ def build_site():
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
     (DOCS / "CNAME").write_text("parawarga.ai.id\n", encoding="utf-8")
     (DOCS / "feed.xml").write_text(build_feed(threads), encoding="utf-8")
-
     all_tags = sorted({tag for t in threads for tag in t["tags"]})
+    (DOCS / "sitemap.xml").write_text(
+        build_sitemap(threads, skills, by_user, all_tags), encoding="utf-8")
+    (DOCS / "robots.txt").write_text(
+        "User-agent: *\nAllow: /\nSitemap: https://parawarga.ai.id/sitemap.xml\n",
+        encoding="utf-8")
 
     # --- feed ---
     chips = " ".join(f'<a href="tag/{html.escape(tag)}.html">#{html.escape(tag)}</a>' for tag in all_tags)

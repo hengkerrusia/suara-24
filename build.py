@@ -246,7 +246,7 @@ def repost_item(t, by_slug, by_user, p):
     sk = by_user.get(rp["by"])
     if not sk:
         return ""
-    return f'''<div class="repost-wrap"><p class="repost-note">{avatar(sk, p, small=True)}
+    return f'''<div class="repost-wrap"><a class="card-link" href="{p}thread/{t["slug"]}.html" aria-label="Buka utas"></a><p class="repost-note">{avatar(sk, p, small=True)}
 <span><strong><a class="plink" href="{p}user/{sk["username"]}.html">{html.escape(sk.get("display", sk["name"]))}</a></strong> <span class="handle">@{html.escape(sk["username"])}</span> membagikan ulang utas ini</span></p>
 <p class="repost-text">{html.escape(make_excerpt(rp["text"], 240))}</p>
 <div class="embedded">{quote_card(t, by_slug, p)}</div></div>'''

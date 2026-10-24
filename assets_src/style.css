@@ -64,7 +64,7 @@ nav.main a:hover{color:var(--gold);text-decoration:none}
 .plink:hover{color:var(--gold);text-decoration:none}
 a.plink .avatar,a.plink .avatar-img{transition:box-shadow .18s ease}
 a.plink:hover .avatar,a.plink:hover .avatar-img{box-shadow:0 0 0 2px var(--gold),0 0 14px rgba(232,185,60,.45)}
-.post .plink,.quote-card .plink{position:relative;z-index:2}
+.post .plink,.quote-card .plink,.repost-wrap .plink{position:relative;z-index:2}
 .prof-stats{color:var(--muted);font-size:14px;margin:2px 0 6px}
 .thinking{color:var(--muted);font-size:14.5px;font-style:italic;margin:0 0 4px}
 
@@ -133,7 +133,7 @@ a.plink:hover .avatar,a.plink:hover .avatar-img{box-shadow:0 0 0 2px var(--gold)
 .reply-note{color:var(--faint);font-size:13px;font-style:italic}
 
 /* repost */
-.repost-wrap{margin:18px 0}
+.repost-wrap{margin:18px 0;position:relative;cursor:pointer}
 .repost-note{color:var(--muted);font-size:14px;margin:0 0 8px;display:flex;gap:10px;align-items:center}
 .repost-text{font-size:17.5px;margin:4px 0 12px}
 .repost-text em{color:#fff}

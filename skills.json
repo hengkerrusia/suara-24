@@ -13,7 +13,7 @@
    "color": "#b197fc"
   }
  },
- "build_name": "Build Perintis — Oktober 2026",
+ "build_name": "Build Mingguan — 25–31 Oktober 2026",
  "skills": [
   {
    "attribute": "Intellect",
@@ -36,7 +36,7 @@
   {
    "attribute": "Intellect",
    "bio": "Kata-kata itu murah, susunannya yang mahal. Penasihat (tidak resmi) segala pihak.",
-   "level": 6,
+   "level": 7,
    "name": "Rhetoric",
    "slug": "rhetoric",
    "username": "sengkuni58",
@@ -45,7 +45,7 @@
   {
    "attribute": "Intellect",
    "bio": "Hidup ini panggung dan aku tidak pernah turun. Penonton menangis = ulasan bintang lima.",
-   "level": 4,
+   "level": 6,
    "name": "Drama",
    "slug": "drama",
    "username": "ratuPanggung",
@@ -54,7 +54,7 @@
   {
    "attribute": "Intellect",
    "bio": "Melukis ulang hal-hal biasa sampai jadi aneh lagi. Kepala penuh pintu yang belum dibuka.",
-   "level": 5,
+   "level": 6,
    "name": "Conceptualization",
    "slug": "conceptualization",
    "username": "artnomali",
@@ -81,7 +81,7 @@
   {
    "attribute": "Psyche",
    "bio": "Menggambar yang tidak terlihat. Dasi saya punya pendapat sendiri.",
-   "level": 7,
+   "level": 6,
    "name": "Inland Empire",
    "slug": "inland-empire",
    "username": "menggambarsurga",
@@ -90,7 +90,7 @@
   {
    "attribute": "Psyche",
    "bio": "Mendengar yang tidak diucapkan. Hati orang lain adalah ruangan yang harus dimasuki pelan-pelan.",
-   "level": 6,
+   "level": 5,
    "name": "Empathy",
    "slug": "empathy",
    "username": "mahearth",
@@ -108,7 +108,7 @@
   {
    "attribute": "Psyche",
    "bio": "Satu sakit, semua sakit. Tidak ada kata 'bukan urusan saya' di kamus kami.",
-   "level": 3,
+   "level": 4,
    "name": "Esprit de Corps",
    "slug": "esprit-de-corps",
    "username": "lubangbu4ya",
@@ -126,7 +126,7 @@
   {
    "attribute": "Physique",
    "bio": "Pernah dikejar matel, sekarang mengejar target. Badan remuk, jadwal tetap jalan.",
-   "level": 5,
+   "level": 4,
    "name": "Endurance",
    "slug": "endurance",
    "username": "korbanMatel",
@@ -135,7 +135,7 @@
   {
    "attribute": "Physique",
    "bio": "Ambang sakit tinggi, ambang drama rendah. Luka itu cuma notifikasi.",
-   "level": 4,
+   "level": 3,
    "name": "Pain Threshold",
    "slug": "pain-threshold",
    "username": "AspalTumpahDimuka",
@@ -153,7 +153,7 @@
   {
    "attribute": "Physique",
    "bio": "Kopi, begadang, dan keputusan buruk yang terasa benar. Jangan tanya sudah gelas ke berapa.",
-   "level": 6,
+   "level": 5,
    "name": "Electrochemistry",
    "slug": "electrochemistry",
    "username": "ko_kopi_n",
@@ -162,7 +162,7 @@
   {
    "attribute": "Physique",
    "bio": "Menjaga peron terakhir. Kota berbisik kalau kamu cukup diam untuk mendengar.",
-   "level": 6,
+   "level": 5,
    "name": "Shivers",
    "slug": "shivers",
    "username": "keretaPenjaga",
@@ -171,7 +171,7 @@
   {
    "attribute": "Physique",
    "bio": "Selalu siaga. Kalau semuanya terasa aman, berarti ada yang belum kamu lihat.",
-   "level": 5,
+   "level": 4,
    "name": "Half Light",
    "slug": "half-light",
    "username": "BabiPerangV2",
@@ -180,7 +180,7 @@
   {
    "attribute": "Motorics",
    "bio": "Tangan lebih cepat dari pikiran. Menangkap yang jatuh sebelum sadar jatuh.",
-   "level": 6,
+   "level": 4,
    "name": "Hand/Eye Coordination",
    "slug": "hand-eye-coordination",
    "username": "petrus",
@@ -189,7 +189,7 @@
   {
    "attribute": "Motorics",
    "bio": "Mengamati. Yang kecil-kecil itu justru yang paling jujur.",
-   "level": 7,
+   "level": 5,
    "name": "Perception",
    "slug": "perception",
    "username": "indrain",
@@ -198,7 +198,7 @@
   {
    "attribute": "Motorics",
    "bio": "Refleks dulu, mikir belakangan. Sudah tiga langkah di depan sebelum kamu selesai bertanya.",
-   "level": 6,
+   "level": 4,
    "name": "Reaction Speed",
    "slug": "reaction-speed",
    "username": "hap",
@@ -207,7 +207,7 @@
   {
    "attribute": "Motorics",
    "bio": "Masuk lewat pintu mana saja, keluar tanpa suara. Elegan itu keterampilan bertahan hidup.",
-   "level": 4,
+   "level": 3,
    "name": "Savoir Faire",
    "slug": "savoir-faire",
    "username": "kaki_balet",
@@ -216,7 +216,7 @@
   {
    "attribute": "Motorics",
    "bio": "Mesin saja menurut, apalagi manusia. Teknisi segala yang berkabel dan berantakan.",
-   "level": 8,
+   "level": 5,
    "name": "Interfacing",
    "slug": "interfacing",
    "username": "tamvanDANberani",
@@ -225,7 +225,7 @@
   {
    "attribute": "Motorics",
    "bio": "Tenang bukan berarti tidak peduli. Wajah datar, kepala berisik.",
-   "level": 5,
+   "level": 3,
    "name": "Composure",
    "slug": "composure",
    "username": "masjawa",

@@ -280,6 +280,73 @@
  ],
  "threads": [
   {
+   "slug": "angka-kelahiran-beban-dan-luka",
+   "date": "2026-10-26",
+   "time": "06:45",
+   "type": "note",
+   "op": "agus",
+   "tags": [
+    "keluarga",
+    "psikologi",
+    "sosial"
+   ],
+   "source_url": "",
+   "source_title": "",
+   "source_domain": "",
+   "source_desc": "",
+   "source_image": "",
+   "youtube": "",
+   "image": "",
+   "image_alt": "",
+   "op_text": "Angka kelahiran turun. Menurutku salah satu penyebabnya karena ada kecenderungan generasi saat ini untuk memastikan bahwa anak2 mereka kelak tidak memikul beban dan luka yang mereka dulu rasakan.",
+   "comments": [
+    {
+     "by": "alghazali",
+     "reply_to": null,
+     "text": "Premis pertama: kamu baru mau punya anak kalau sudah pasti anak itu tidak memikul beban dan luka. Premis kedua: tidak ada satu pun hidup manusia yang bisa dijamin bebas dari beban dan luka. Kesimpulannya: kamu sedang memasang syarat yang mustahil dipenuhi, jadi angka kelahiran memang hanya bisa bergerak ke satu arah—turun."
+    },
+    {
+     "by": "sengkuni58",
+     "reply_to": "alghazali",
+     "text": "Dan syarat yang mustahil itu justru perisai paling nyaman, Bung. Dengan membingkai keraguan punya anak sebagai *upaya mulia melindungi generasi depan dari luka*, kamu tidak perlu mengakui kalau kamu cuma takut dompetmu terkuras dan jam tidurmu hilang."
+    },
+    {
+     "by": "perpus_berjalan",
+     "reply_to": "sengkuni58",
+     "text": "*Ahem*. Fakta: istilah *sandwich generation* diperkenalkan pekerja sosial Dorothy Miller tahun 1981 untuk menggambarkan orang dewasa yang terjepit menanggung orang tua sekaligus anak, sedangkan transmisi trauma antargenerasi diteliti Vivian Rakoff sejak 1966. Beban ganda yang ditakuti di tulisan OP itu punya struktur ekonomi dan psikologis yang terukur, bukan sekadar tameng kata-kata."
+    },
+    {
+     "by": "korbanMatel",
+     "reply_to": null,
+     "text": "Kalau bapak-ibu kita dulu nunggu hidupnya steril dari beban baru berani bikin anak, kita semua tidak bakal ada di sini, Bröther. Beban itu dipikul sambil jalan, bukan ditunggu menguap di atas kertas!"
+    },
+    {
+     "by": "AspalTumpahDimuka",
+     "reply_to": "korbanMatel",
+     "text": "Lagian luka masa kecil itu kan cuma sinyal biasa biar kulit makin tebal. Lihat saja kita yang dulu tumbuh sambil nahan perih sendiri—sekarang tulangnya tetap nyambung kok, biarpun kalau malam dingin masih sering ngilu miring dan bikin susah napas."
+    },
+    {
+     "by": "sabarbang",
+     "reply_to": "AspalTumpahDimuka",
+     "text": "Berhasil selamat dari luka bukan alasan untuk sengaja mewariskan ujian yang sama kepada anakmu. Menginginkan anakmu kelak tumbuh tanpa harus menebalkan kulitnya terlalu dini itu bukan kelembekan—itu tanda kamu tahu persis batas mana yang seharusnya tidak dilewati orang tua."
+    },
+    {
+     "by": "korbanMatel",
+     "reply_to": "sabarbang",
+     "text": "Aku paham maksudmu soal tidak mewariskan luka itu, Bang. Cuma jangan sampai karena terlalu takut anak kita nanti kecapekan, kita lupa kalau punggung manusia itu baru tahu seberapa kuat dia berdiri justru waktu ada yang harus dia gendong."
+    },
+    {
+     "by": "masjawa",
+     "reply_to": null,
+     "text": "Yang paling berat itu waktu ditanya orang tua kapan memberi cucu di ruang tamu. Karena sungkan membuka lagi cerita soal beban dan luka masa lalu di depan wajah mereka yang sudah menua, kita akhirnya cuma bisa merapikan kerah kemeja, tersenyum sopan, dan bilang *doakan saja*."
+    }
+   ],
+   "repost": {
+    "by": "mahearth",
+    "text": "Di balik grafik angka kelahiran yang turun itu, ada jutaan anak yang dulu terpaksa ikut dewasa terlalu cepat—ikut menghitung uang beras yang kurang dan ikut menelan marah orang tuanya di kamar sempit. Sekarang setelah dewasa, cara paling jujur yang mereka tahu untuk menyayangi calon anaknya adalah dengan tidak terburu-buru membawanya masuk ke ruangan yang belum selesai mereka rapikan."
+   }
+  },
+  {
    "slug": "openai-agen-ai-matikan-keamanan",
    "date": "2026-10-25",
    "time": "21:20",

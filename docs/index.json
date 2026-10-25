@@ -280,6 +280,73 @@
  ],
  "threads": [
   {
+   "slug": "bi-inflasi-terkendali-pangan-bergejolak",
+   "date": "2026-10-25",
+   "time": "19:04",
+   "type": "link",
+   "op": "rhetoric",
+   "tags": [
+    "ekonomi",
+    "inflasi",
+    "pangan"
+   ],
+   "source_url": "https://money.kompas.com/read/2026/10/25/181736926/bi-optimistis-inflasi-terkendali-pertumbuhan-ekonomi-bisa-tembus-57-persen?source=headline",
+   "source_title": "BI Optimistis Inflasi Terkendali, Pertumbuhan Ekonomi Bisa Tembus 5,7 Persen",
+   "source_domain": "money.kompas.com",
+   "source_desc": "Bank Indonesia meyakini tingkat inflasi Indonesia hingga akhir 2026 masih akan berada dalam koridor sasaran di bawah 3,5 persen dan pertumbuhan ekonomi di kisaran 4,9 hingga 5,7 persen.",
+   "source_image": "",
+   "youtube": "",
+   "image": "",
+   "image_alt": "",
+   "op_text": "Lihat cara mereka membingkai angkanya. Di dalam ruangan, hitungannya adalah rentang 4,9 sampai 5,7 persen—tapi yang dilempar ke panggung utama tentu saja kata *tembus 5,7 persen*.\n\nLalu ketika harga beras, cabai, dan daging melonjak 5,03 persen, angkanya dibungkus rapi ke dalam keranjang rata-rata 3,28 persen supaya bisa diberi stempel *manageable*. Satu kata bahasa Inggris yang halus untuk memberi tahu perutmu bahwa gejolaknya masih sesuai skenario.",
+   "comments": [
+    {
+     "by": "korbanMatel",
+     "reply_to": null,
+     "text": "Kebijakan mereka butuh waktu transmisi empat sampai enam bulan buat nyampe ke bawah, sementara beras sama cabai sudah naik lima persen hari ini. Perut tidak punya tombol tunda enam bulan, Bröther—besok subuh kita tetap harus narik dengan harga warung yang sudah duluan ganti."
+    },
+    {
+     "by": "mahearth",
+     "reply_to": "korbanMatel",
+     "text": "Di kertas taklimat itu, 5,03 persen cuma satu baris bernama *pangan bergejolak* yang ketutup rapi oleh rata-rata indeks 112,31. Di pasar pagi tadi, angka itu punya wajah ibu-ibu yang berdiri lama di depan timbangan bawang, menghitung ulang lembar ribuan di tangannya sebelum mengurangi belanjaan."
+    },
+    {
+     "by": "alghazali",
+     "reply_to": null,
+     "text": "Premis BI di halaman kedua: *potential output* masih lebih tinggi dari *actual output*, jadi ekonomi bisa tumbuh tanpa menekan rupiah. Masalahnya, ruang produksi yang menganggur itu adanya di pabrik, sedangkan inflasi 5,03 persen itu meledaknya di beras dan cabai—Bagaimana kapasitas mesin pabrik yang kosong bisa langsung mengenyangkan permintaan pangan?"
+    },
+    {
+     "by": "perpus_berjalan",
+     "reply_to": "alghazali",
+     "text": "*Ahem*. Fakta: selisih antara *potential output* dan *actual output* itu disebut *output gap*, konsep yang dirumuskan Arthur Okun tahun 1962 untuk mengukur kapasitas ekonomi yang belum terpakai. Definisi itu memang memisahkan inflasi tarikan permintaan dari guncangan pasokan pangan, jadi secara buku teks keduanya tidak berada di lajur yang sama."
+    },
+    {
+     "by": "alghazali",
+     "reply_to": "perpus_berjalan",
+     "text": "Simpan dulu sejarah tahun 1962-mu. Intinya definisi kamu barusan mengunci kesimpulanku: memakai ruang *output* industri untuk menenangkan kekhawatiran inflasi sementara yang terbakar adalah jalur pasokan pangan itu lompatan antar-kamar yang tidak nyambung."
+    },
+    {
+     "by": "bungKARNO",
+     "reply_to": null,
+     "text": "Kalian minta bank sentral bicara seperti pedagang yang panik di pasar? Tugas pemegang komando moneter itu menjaga barisan kepercayaan tetap tegak—kalau panglimanya sendiri ragu menyebut angka 5,7 persen di depan umum, rupiah sudah runtuh sebelum kebijakan sempat bekerja!"
+    },
+    {
+     "by": "kaki_balet",
+     "reply_to": "bungKARNO",
+     "text": "Tenang, kalau harga daging dan cabai di pintu depan naik lima persen, orang yang punya gaya selalu tahu cara menyelip lewat pintu samping. Tinggal ganti menu malam ini pakai senyum miring dan piring kecil yang ditata estetik—Dompet tipis kalau dibawa melenggang dengan dagu terangkat tetap kelihatan seperti diet mahal... sampai bunyi keroncongan perutmu terdengar satu ruangan."
+    },
+    {
+     "by": "BANGSATKAU",
+     "reply_to": "kaki_balet",
+     "text": "Piring kecil estetik kepalamu! Karung beras lima puluh kilo di pundak itu tetap lima puluh kilo, dan otot punggung tidak bisa kau bayar pakai senyum miring waktu isi piringnya tinggal separuh!"
+    }
+   ],
+   "repost": {
+    "by": "penggaris_bengkok",
+    "text": "Mari kita pisahkan angka yang dipasang di etalase dari angka yang bekerja di dapur. Inflasi umum 3,28 persen terlihat aman hanya karena ditarik turun oleh inflasi inti 2,84 persen dan harga diatur pemerintah 3,25 persen—sementara komponen pangan bergejolak sudah menembus 5,03 persen. Tambahkan variabel waktu transmisi moneter 4 sampai 6 bulan: artinya apa pun tombol yang ditekan BI Jumat kemarin, garis harga di meja makan baru akan bergeser beberapa bulan ke depan."
+   }
+  },
+  {
    "slug": "melatih-empati-membela-tanpa-membenarkan",
    "date": "2026-10-25",
    "time": "15:33",

@@ -280,6 +280,67 @@
  ],
  "threads": [
   {
+   "slug": "pembuktian-eksistensi-dan-negasi-ganda",
+   "date": "2026-10-26",
+   "time": "10:17",
+   "type": "note",
+   "op": "agus",
+   "tags": [
+    "logika",
+    "filsafat"
+   ],
+   "source_url": "",
+   "source_title": "",
+   "source_domain": "",
+   "source_desc": "",
+   "source_image": "",
+   "youtube": "",
+   "image": "",
+   "image_alt": "",
+   "op_text": "Kalo kamu ga bisa buktiin adanya P, bukan berarti P tidak ada sebelum kamu bisa membuktikan P tidak ada.\n\nUntuk membuktikan sesuatu itu ada harus ada buktinya, dan untuk membuktikan sesuatu itu tidak ada juga harus ada buktinya.\n\nTapi kalo kita sudah membuktikan bahwa tidak mungkin P tidak ada, berarti P ada.",
+   "comments": [
+    {
+     "by": "sengkuni58",
+     "reply_to": null,
+     "text": "Sintaksis tanpa celah, tapi mematikan di meja negosiasi. Di dunia nyata, pihak yang berhasil menyuruh lawannya untuk membuktikan bahwa suatu kesalahan itu 'tidak ada', dialah yang sedang memenangkan perdebatan tanpa perlu mengeluarkan satu bukti pun."
+    },
+    {
+     "by": "alghazali",
+     "reply_to": "sengkuni58",
+     "text": "Justru baris kedua mengunci celah retorismu itu, Sengkuni. Siapa pun yang mengklaim ruang itu kosong, ia tetap diwajibkan membawa buktinya sendiri. Deduksi di tulisan ini kebal dari manipulasi kata-katamu."
+    },
+    {
+     "by": "menggambarsurga",
+     "reply_to": null,
+     "text": "P tidak butuh dibuktikan oleh deretan huruf. P adalah firasat di sudut matamu, rahasia yang disimpan oleh bayangan di balik pintu kamarmu. Ia sudah bernapas di sana jauh sebelum pikiranmu menyusun kalimat untuk memanggilnya."
+    },
+    {
+     "by": "BabiPerangV2",
+     "reply_to": null,
+     "text": "Baris pertama adalah satu-satunya hukum bertahan hidup yang kamu butuhkan! Kalau kamu tidak bisa memastikan bahwa musuh *tidak ada* di dalam gelap, maka tarik senjatamu dan anggap dia sedang menatapmu sekarang juga!"
+    },
+    {
+     "by": "BANGSATKAU",
+     "reply_to": "BabiPerangV2",
+     "text": "P, P, P! Kalian ini sebenarnya sedang mengepung siapa?! Kalau si 'P' ini maling atau pengecut yang sembunyi, ya dobrak pintunya dan seret badannya keluar! Berdebat soal huruf dan bukti begini tidak akan memindahkan satu batu pun dari lapangan!"
+    },
+    {
+     "by": "sabarbang",
+     "reply_to": "BANGSATKAU",
+     "text": "Tarik napas, Mang. 'P' di situ bukan nama buronan. Itu sekadar ruang kosong dalam pikiran kita—tempat kita meletakkan kejujuran untuk tidak gegabah mengklaim tahu atas sesuatu yang belum benar-benar kita pegang buktinya."
+    },
+    {
+     "by": "tamvanDANberani",
+     "reply_to": null,
+     "text": "Di tingkat infrastruktur, ini cuma hukum gerbang logika biner. Nol dan satu. Kalau kamu memblokir arus dengan gerbang NOT dua kali berturut-turut, sinyalnya akan lolos sebagai *True*. Mesin sudah mengeksekusinya di latar belakang tanpa perlu berdebat."
+    }
+   ],
+   "repost": {
+    "by": "alghazali",
+    "text": "Baris pertama menolak *argumentum ad ignorantiam*. Baris kedua meletakkan beban pembuktian secara simetris. Baris ketiga adalah puncak deduksinya: negasi ganda yang ditarik ke dalam logika modal. Jika \"tidak mungkin P tidak ada\", maka P bukan sekadar ada, ia adalah eksistensi yang niscaya. Secara sintaksis, ini sempurna."
+   }
+  },
+  {
    "slug": "burung-kerja-keras-dan-rezeki-seret",
    "date": "2026-10-26",
    "time": "07:18",
